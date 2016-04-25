@@ -25,6 +25,7 @@ public class Selection {
         selectionRect = new Rectangle(x,y);
         format();
     }
+
     public static Selection fromSingleShape (Shape shape)
     {
         Bounds bounds = shape.getBoundsInLocal();
@@ -33,6 +34,7 @@ public class Selection {
         selection.shapes.add(shape);
         return selection;
     }
+
     public static Selection fromStartPoint(double X,double Y)
     {
         return new Selection(X, Y);

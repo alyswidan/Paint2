@@ -14,6 +14,7 @@ public class SelectionManager {
         if(ourInstance == null)
             ourInstance = new SelectionManager();
         return ourInstance;
+
     }
 
 
@@ -29,7 +30,7 @@ public class SelectionManager {
     }
     public boolean isSelected(Shape shape)
     {
-        Selection required = Selection.fromBounds(shape.getBoundsInLocal());
+        Selection required = Selection.fromSingleShape(shape);//check this siwii
         if(selections.containsKey(required))return true;
         for (Selection selection:selections.keySet())
             if(selections.get(selection).getBounds().contains(required.getBounds()))return true;

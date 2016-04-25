@@ -7,4 +7,5 @@ import javafx.scene.shape.Shape;
  */
 public interface CopyableShape {
     void copy();
+
 }

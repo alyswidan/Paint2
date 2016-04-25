@@ -15,13 +15,13 @@ public class SelectCommand implements Command{
     @Override
     public void execute() {
         if(!SelectionManager.getInstance().isSelected(shape))
-            SelectionManager.getInstance().add(Selection.fromBounds(shape.getBoundsInLocal()));
+            SelectionManager.getInstance().add(Selection.fromBounds(shape.getBoundsInLocal()));//which will be called
     }
 
     @Override
     public void undo() {
         if(SelectionManager.getInstance().isSelected(shape))
-            SelectionManager.getInstance().remove(Selection.fromBounds(shape.getBoundsInLocal()));
+            SelectionManager.getInstance().remove(Selection.fromBounds(shape.getBoundsInLocal()));//which will be called
     }
 
 }
