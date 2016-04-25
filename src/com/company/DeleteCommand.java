@@ -19,7 +19,7 @@ public class DeleteCommand implements Command {
 
     @Override
     public void undo() {
-
+        //the undo is to draw the deleted shape again
     }
 
     @Override
