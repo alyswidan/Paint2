@@ -15,6 +15,7 @@ public class DeleteCommand implements Command{
     public void execute() {
         DrawingCanvas.getInstance().getCanvas().getChildren().remove(selection.getShapes());
         //yet to push in the stack
+        
     }
 
     @Override
