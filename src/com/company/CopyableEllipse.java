@@ -3,7 +3,7 @@ package com.company;
 import javafx.scene.shape.Ellipse;
 
 /**
- * Created by Mohamedon 4/25/2016.
+ * Created by Mohamed on 4/25/2016.
  */
 public class CopyableEllipse implements CopyableShape {
 
