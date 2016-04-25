@@ -6,11 +6,11 @@ import javafx.scene.transform.Translate;
 /**
  * Created by ADMIN on 4/25/2016.
  */
-public class MoveCommand implements Command {
+public class moveCommand implements Command {
     private Selection selection;
     private Translate translate;
 
-    public MoveCommand(Selection selection,double x,double y) {
+    public moveCommand(Selection selection, double x, double y) {
         this.selection = selection;
         translate = new Translate(x,y);
     }
