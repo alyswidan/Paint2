@@ -9,20 +9,19 @@ import javafx.scene.transform.Rotate;
  * Created by ADMIN on 4/25/2016.
  */
 public class RotateCommand implements Command {
-    private Shape shape;
+    private Selection selection;
     private Rotate rotate;
 
 
-    public RotateCommand(Shape shape,Selection selection,double angle)  {
+    public RotateCommand(Selection selection,double angle)  {
+        this.selection = selection;
         Bounds bounds = selection.getBounds();
-        rotate = new Rotate(angle,bounds.getMinX()+bounds.getWidth(),bounds.getMinY()+bounds.getHeight());
-
-        this.shape = shape;
+        rotate = new Rotate(angle,(bounds.getMinX()+bounds.getWidth())/2,(bounds.getMinY()+bounds.getHeight())/2);
     }
 
     @Override
     public void execute() {
-        shape.getTransforms().add(rotate);
+        selection.addTransform(rotate);
 
     }
 
@@ -30,7 +29,7 @@ public class RotateCommand implements Command {
     public void undo() {
         //shape.getTransforms().remove(rotate);
         try {
-            shape.getTransforms().add(rotate.createInverse());
+            selection.addTransform(rotate.createInverse());
         } catch (NonInvertibleTransformException e) {
             e.printStackTrace();
         }
