@@ -4,6 +4,7 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.transform.Transform;
@@ -42,12 +43,14 @@ public class Selection {
         selectionRect.setHeight(Y-selectionRect.getY());
         Bounds bounds = selectionRect.getBoundsInLocal();
         Iterator<Node> drawings = DrawingCanvas.getInstance().getShapes();
-        double maxX = 0,maxY = 0,minX = 1000,minY =1000;
+        double maxX = X,maxY = Y,minX = selectionRect.getX(),minY =selectionRect.getY();
         while (drawings.hasNext())
         {
-            Bounds currentBounds = drawings.next().getBoundsInLocal();
-            if(bounds.contains(currentBounds)||bounds.contains(currentBounds))
+            Shape currentShape = (Shape) drawings.next();
+            Bounds currentBounds = currentShape.getBoundsInLocal();
+            if(bounds.contains(currentBounds)||bounds.intersects(currentBounds))
             {
+                shapes.add(currentShape);
                 if(currentBounds.getMaxX()>maxX)maxX = currentBounds.getMaxX();
                 if(currentBounds.getMaxY()>maxY)maxY = currentBounds.getMaxY();
                 if(currentBounds.getMinX()<minX)minX = currentBounds.getMinX();
@@ -59,6 +62,11 @@ public class Selection {
         selectionRect.setWidth(maxX-minX);
         selectionRect.setHeight(maxY-minY);
     }
+
+    public Iterator<Shape> getShapes()
+    {
+        return shapes.iterator();
+    }
     public Bounds getBounds()
     {
         return selectionRect.getBoundsInLocal();
@@ -69,10 +77,25 @@ public class Selection {
         selectionRect.setStroke(Color.BLACK);
     }
 
-    public void transform(Transform trans)
+    public void addTransform(Transform trans)
     {
-
+        selectionRect.getTransforms().add(trans);
+        while (getShapes().hasNext())
+        {
+            getShapes().next().getTransforms().add(trans);
+        }
     }
+
+
+    public void removeTransform(Transform trans)
+    {
+        selectionRect.getTransforms().remove(trans);
+        while (getShapes().hasNext())
+        {
+            getShapes().next().getTransforms().remove(trans);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
