@@ -4,7 +4,7 @@ package com.company;
  * Created by ADMIN on 4/24/2016.
  */
 public class CopyCommand implements Command {
-    CopyableShape copyable;
+    private CopyableShape copyable;
 
     public CopyCommand(CopyableShape copyable) {
         this.copyable = copyable;
@@ -18,5 +18,10 @@ public class CopyCommand implements Command {
     @Override
     public void undo() {
         ShapeClipboard.getInstance().clear();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
