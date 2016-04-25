@@ -11,7 +11,7 @@ import javafx.scene.transform.Rotate;
 public class RotateCommand implements Command {
     private Shape shape;
     private Rotate rotate;
-    private Rotate reverse;
+
 
     public RotateCommand(Shape shape,Selection selection,double angle)  {
         Bounds bounds = selection.getBounds();
@@ -23,10 +23,16 @@ public class RotateCommand implements Command {
     @Override
     public void execute() {
         shape.getTransforms().add(rotate);
+
     }
 
     @Override
     public void undo() {
-        shape.getTransforms().remove(rotate);
+        //shape.getTransforms().remove(rotate);
+        try {
+            shape.getTransforms().add(rotate.createInverse());
+        } catch (NonInvertibleTransformException e) {
+            e.printStackTrace();
+        }
     }
 }

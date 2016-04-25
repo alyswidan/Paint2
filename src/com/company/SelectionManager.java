@@ -16,6 +16,7 @@ public class SelectionManager {
         return ourInstance;
     }
 
+
     private SelectionManager() {
     }
     public void add(Selection selection)
