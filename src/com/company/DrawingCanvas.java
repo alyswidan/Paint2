@@ -11,18 +11,20 @@ import java.util.Iterator;
 public class DrawingCanvas {
     private static DrawingCanvas ourInstance;
     private Pane canvas;
+
     public static DrawingCanvas getInstance() {
-        if(ourInstance==null)ourInstance = new DrawingCanvas();
+        if (ourInstance == null) ourInstance = new DrawingCanvas();
         return ourInstance;
     }
 
-    public Pane getCanvas(){
+    public Pane getCanvas() {
         return canvas;
     }
-    public Iterator<Node> getShapes()
-    {
+
+    public Iterator<Node> getShapes() {
         return getCanvas().getChildren().iterator();
     }
+
     private DrawingCanvas() {
         canvas = new Pane();
     }

@@ -13,10 +13,10 @@ public class RotateCommand implements Command {
     private Rotate rotate;
 
 
-    public RotateCommand(Selection selection,double angle)  {
+    public RotateCommand(Selection selection, double angle) {
         this.selection = selection;
         Bounds bounds = selection.getBounds();
-        rotate = new Rotate(angle,(bounds.getMinX()+bounds.getWidth())/2,(bounds.getMinY()+bounds.getHeight())/2);
+        rotate = new Rotate(angle, (bounds.getMinX() + bounds.getWidth()) / 2, (bounds.getMinY() + bounds.getHeight()) / 2);
     }
 
     @Override

@@ -5,7 +5,7 @@ import javafx.scene.shape.Polygon;
 /**
  * Created by user on 4/25/2016.
  */
-public class CopyablePolygon implements CopyableShape{
+public class CopyablePolygon implements CopyableShape {
 
     private Polygon polygon;
 

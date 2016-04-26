@@ -12,7 +12,7 @@ public class moveCommand implements Command {
 
     public moveCommand(Selection selection, double x, double y) {
         this.selection = selection;
-        translate = new Translate(x,y);
+        translate = new Translate(x, y);
     }
 
     @Override

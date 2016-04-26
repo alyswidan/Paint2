@@ -5,7 +5,7 @@ import javafx.scene.shape.Rectangle;
 /**
  * Created by user on 4/25/2016.
  */
-public class CopyableRectangle implements CopyableShape{
+public class CopyableRectangle implements CopyableShape {
 
     Rectangle rectangle;
 

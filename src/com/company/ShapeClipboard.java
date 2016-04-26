@@ -8,12 +8,24 @@ import javafx.scene.shape.Shape;
 public class ShapeClipboard {
     private static ShapeClipboard clipboard;
     private Shape current;
-    private ShapeClipboard() {}
+
+    private ShapeClipboard() {
+    }
+
     public static ShapeClipboard getInstance() {
-        if(clipboard == null)clipboard = new ShapeClipboard();
+        if (clipboard == null) clipboard = new ShapeClipboard();
         return clipboard;
     }
-    public void set(Shape shape) {current = shape;}
-    public Shape get(){return current;}
-    public void clear(){current = null;}
+
+    public void set(Shape shape) {
+        current = shape;
+    }
+
+    public Shape get() {
+        return current;
+    }
+
+    public void clear() {
+        current = null;
+    }
 }

@@ -5,7 +5,7 @@ import javafx.scene.shape.Rectangle;
 /**
  * Created by user on 4/25/2016.
  */
-public class CopyableSquare extends CopyableRectangle{
+public class CopyableSquare extends CopyableRectangle {
 
     @Override
     public void copy() {
