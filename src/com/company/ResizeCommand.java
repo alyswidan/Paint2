@@ -13,7 +13,7 @@ public class ResizeCommand implements Command {
 
     public ResizeCommand(Selection selection, double factorX, double factorY) {
         this.selection = selection;
-        scale = new Scale(factorX, factorX, (selection.getBounds().getMinX() + selection.getBounds().getWidth()) / 2,
+        scale = new Scale(factorX, factorY, (selection.getBounds().getMinX() + selection.getBounds().getWidth()) / 2,
                 (selection.getBounds().getMinY() + selection.getBounds().getHeight()) / 2);
     }
 

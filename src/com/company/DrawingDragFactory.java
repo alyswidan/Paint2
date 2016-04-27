@@ -17,7 +17,6 @@ public class DrawingDragFactory {
         EventHandler<MouseDragEvent> drag;
         if(shape instanceof Circle || shape instanceof Ellipse)
         {
-
             drag = event -> {
                 shape.getTransforms().add(new Scale(event.getX() - startX,event.getY()-startY));
             };

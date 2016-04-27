@@ -9,48 +9,40 @@ import javafx.scene.shape.*;
  */
 public class DrawingClickFactory {
 
-    public EventHandler<MouseEvent> makeHandler(Shape shape)
-    {
+    public EventHandler<MouseEvent> makeHandler(Shape shape) {
         EventHandler<MouseEvent> click = null;
-        if(shape instanceof Circle )
-        {
+        if (shape instanceof Circle) {
             click = event ->
             {
                 ((Circle) shape).setCenterX(event.getX());
                 ((Circle) shape).setCenterY(event.getY());
             };
-        }
-        else if(shape instanceof Rectangle)
-        {
+        } else if (shape instanceof Rectangle) {
             click = event ->
             {
                 ((Rectangle) shape).setX(event.getX());
                 ((Rectangle) shape).setY(event.getY());
             };
-        }
-        else if (shape instanceof Ellipse){
+        } else if (shape instanceof Ellipse) {
             click = event -> {
                 ((Ellipse) shape).setCenterX(event.getX());
                 ((Ellipse) shape).setCenterY(event.getY());
             };
-        }
-        else if (shape instanceof Line)
-        {
+        } else if (shape instanceof Line) {
             click = event -> {
                 ((Line) shape).setStartX(event.getX());
                 ((Line) shape).setStartY(event.getY());
             };
+        } else if (shape instanceof Polygon) {
+            click = event -> {
+                ((Polygon) shape).getPoints().addAll(new Double[]{event.getX(),event.getY()});
+            };
         }
-
 
         return click;
 
 
-
     }
-
-
-
 
 
 }
