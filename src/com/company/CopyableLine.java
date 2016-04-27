@@ -1,19 +1,27 @@
 package com.company;
 
-import javafx.scene.shape.Polygon;
+import javafx.scene.input.Clipboard;
+import javafx.scene.shape.Line;
 
 /**
- * Created by user on 4/26/2016.
+ * Created by Amr on 4/27/2016.
  */
-public class CopyableLine{
+public class CopyableLine implements CopyableShape {
 
-    private CopyablePolygon line;
+    Line line;
 
-    public CopyablePolygon getLine() {
+    @Override
+    public void copy() {
+        Line line2 = new Line(line.getStartX(),line.getStartY(),line.getEndX(),line.getEndY());
+        line2.setStyle(line.getStyle());
+        ShapeClipboard.getInstance().set(line2);
+    }
+
+    public Line getLine() {
         return line;
     }
 
-    public void setLine(CopyablePolygon line) {
+    public void setLine(Line line) {
         this.line = line;
     }
 }
