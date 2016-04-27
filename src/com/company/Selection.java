@@ -21,6 +21,7 @@ public class Selection {
     private List<Shape> shapes;
 
     private Selection(double x, double y) {
+        shapes = new ArrayList<>();
         selectionRect = new Rectangle(x, y);
         format();
     }
@@ -60,9 +61,11 @@ public class Selection {
         selectionRect.setHeight(maxY - minY);
     }
 
-    public Iterator<Shape> getShapes() {
+    public Iterator<Shape> getShapesIterator() {
         return shapes.iterator();
     }
+
+    public List<Shapes> getShapes(){return shapes;}
 
     public Bounds getBounds() {
         return selectionRect.getBoundsInLocal();
