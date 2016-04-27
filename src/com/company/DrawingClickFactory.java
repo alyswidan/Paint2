@@ -11,7 +11,7 @@ public class DrawingClickFactory {
 
     public EventHandler<MouseEvent> makeHandler(Shape shape)
     {
-        EventHandler<MouseEvent> click;
+        EventHandler<MouseEvent> click = null;
         if(shape instanceof Circle )
         {
             click = event ->
