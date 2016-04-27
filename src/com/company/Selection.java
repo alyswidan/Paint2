@@ -80,6 +80,9 @@ public class Selection {
         }
     }
 
+    public Rectangle getSelectionRect() {
+        return selectionRect;
+    }
 
     public void removeTransform(Transform trans) {
         selectionRect.getTransforms().remove(trans);
