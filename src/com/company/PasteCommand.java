@@ -17,6 +17,7 @@ public class PasteCommand implements Command{
 
     @Override
     public void execute() {
+
         DrawingCanvas.getInstance().getCanvas().getChildren().addAll(selection.getShapes());
     }
 
