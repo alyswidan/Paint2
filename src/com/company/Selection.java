@@ -65,7 +65,7 @@ public class Selection {
         return shapes.iterator();
     }
 
-    public List<Shapes> getShapes(){return shapes;}
+    public List<Shape> getShapes(){return shapes;}
 
     public Bounds getBounds() {
         return selectionRect.getBoundsInLocal();
@@ -78,8 +78,8 @@ public class Selection {
 
     public void addTransform(Transform trans) {
         selectionRect.getTransforms().add(trans);
-        while (getShapes().hasNext()) {
-            getShapes().next().getTransforms().add(trans);
+        while (getShapesIterator().hasNext()) {
+            getShapesIterator().next().getTransforms().add(trans);
         }
     }
 
@@ -89,8 +89,8 @@ public class Selection {
 
     public void removeTransform(Transform trans) {
         selectionRect.getTransforms().remove(trans);
-        while (getShapes().hasNext()) {
-            getShapes().next().getTransforms().remove(trans);
+        while (getShapesIterator().hasNext()) {
+            getShapesIterator().next().getTransforms().remove(trans);
         }
     }
 
