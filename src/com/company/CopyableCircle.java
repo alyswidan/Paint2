@@ -11,7 +11,11 @@ public class CopyableCircle implements CopyableShape {
 
     @Override
     public void copy() {
-        ShapeClipboard.getInstance().set(new Circle(circle.getCenterX(), circle.getCenterY(), circle.getRadius(), circle.getFill()));
+        Circle circle2 = new Circle();
+        circle2.setCenterX(circle.getCenterX());
+        circle2.setCenterY(circle.getCenterY());
+        circle2.setStyle(circle.getStyle());
+        ShapeClipboard.getInstance().set(circle2);
     }
 
     public Circle getCircle() {
