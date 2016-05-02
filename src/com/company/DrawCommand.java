@@ -11,8 +11,8 @@ import javafx.util.Pair;
  * Created by Amr on 4/27/2016.
  */
 public class DrawCommand implements Command {
-    EventHandler<MouseEvent> click;
-    EventHandler<MouseEvent> release;
+    private EventHandler<MouseEvent> click;
+    private EventHandler<MouseEvent> release;
 
     public DrawCommand(String shape) {
         double pivot[] = new double[2];
@@ -24,8 +24,8 @@ public class DrawCommand implements Command {
 
     @Override
     public void execute() {
-        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_CLICKED,click);
-        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED,release);
+        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_CLICKED, click);
+        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED, release);
     }
 
     @Override
