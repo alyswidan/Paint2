@@ -13,22 +13,19 @@ import javafx.util.Pair;
 public class DrawCommand implements Command {
     EventHandler<MouseEvent> click;
     EventHandler<MouseEvent> release;
+
     public DrawCommand(String shape) {
         double pivot[] = new double[2];
         DrawingClickFactory clickFactory = new DrawingClickFactory();
-        click =  clickFactory.makeHandler(shape);
-        release = event ->{
-            DrawingCanvas.getInstance().getCanvas().removeEventHandler(MouseEvent.MOUSE_DRAGGED,clickFactory.getDrag());
-        };
-
-
-
-
+        click = clickFactory.makeHandler(shape);
+        DrawingReleaseFactory releaseFactory = new DrawingReleaseFactory();
+        release = releaseFactory.makeHandler(shape, clickFactory);
     }
 
     @Override
     public void execute() {
-
+        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_CLICKED,click);
+        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED,release);
     }
 
     @Override
