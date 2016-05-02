@@ -1,27 +1,33 @@
 package com.company;
 
-import javafx.scene.shape.Shape;
-import javafx.scene.transform.Translate;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
+import javafx.scene.Group;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Created by ADMIN on 4/25/2016.
  */
 public class moveCommand implements Command {
-    private Selection selection;
-    private Translate translate;
 
-    public moveCommand(Selection selection, double x, double y) {
-        this.selection = selection;
-        translate = new Translate(x, y);
+    private EventHandler<MouseEvent> move;
+
+    public moveCommand(Group group) {
+        group.setOnMouseDragged(event -> {
+            MoveFactory moveFactory = new MoveFactory(group);
+            move = moveFactory.makeHandler(group);
+            group.setCursor(Cursor.MOVE);
+        });
+        group.setOnMouseDragReleased(event -> group.removeEventHandler(MouseEvent.MOUSE_DRAGGED, move));
     }
 
     @Override
     public void execute() {
-        selection.addTransform(translate);
+        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_DRAGGED, move);
     }
 
     @Override
     public void undo() {
-        selection.addTransform(translate.createInverse());
+
     }
 }
