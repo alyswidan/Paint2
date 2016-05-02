@@ -95,5 +95,7 @@ public class DrawingClickFactory {
         return drag;
     }
 
-
+    public Shape getShape() {
+        return shape;
+    }
 }
