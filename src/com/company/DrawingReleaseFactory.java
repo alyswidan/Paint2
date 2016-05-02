@@ -16,7 +16,8 @@ public class DrawingReleaseFactory {
         EventHandler<MouseEvent> release = null;
         boolean[] esc = {false};
         if (string.compareToIgnoreCase("circle") == 0 || string.compareToIgnoreCase("ellipse") == 0 ||
-                string.compareToIgnoreCase("rectangle") == 0 || string.compareToIgnoreCase("line") == 0) {
+                string.compareToIgnoreCase("rectangle") == 0 || string.compareToIgnoreCase("line") == 0 ||
+                string.compareToIgnoreCase("square") == 0) {
             release = event -> {
                 DrawingCanvas.getInstance().getCanvas().removeEventHandler(MouseEvent.MOUSE_DRAGGED, clickFactory.getDrag());
             };
@@ -32,6 +33,16 @@ public class DrawingReleaseFactory {
                         ((Polygon) clickFactory.getShape()).getPoints().addAll(event2.getX(), event2.getY());
                     };
                 };
+            }
+        } else if (string.compareToIgnoreCase("triangle") == 0) {
+            int count = 1;
+            while (count != 3) {
+                release = event -> {
+                    EventHandler<MouseEvent> click = event2 -> {
+                        ((Polygon) clickFactory.getShape()).getPoints().addAll(event2.getX(), event2.getY());
+                    };
+                };
+                count++;
             }
         }
         return release;
