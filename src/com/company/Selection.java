@@ -2,6 +2,7 @@ package com.company;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -9,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.transform.Transform;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class Selection {
     private Selection(double x, double y) {
         shapes = new ArrayList<>();
         selectionRect = new Rectangle(x, y);
+        selectionRect.
         format();
     }
 
