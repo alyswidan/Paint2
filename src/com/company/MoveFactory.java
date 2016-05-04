@@ -10,36 +10,20 @@ import javafx.scene.transform.Translate;
  */
 public class MoveFactory {
 
-    private double startX, startY, translateX, translateY;
-    private EventHandler<MouseEvent> move;
 
-    public MoveFactory(Group group) {
-        move = event -> {
-            this.startX = group.getBoundsInLocal().getMinX();
-            this.startY = group.getBoundsInLocal().getMinY();
-            this.translateX = event.getX() - this.startX;
-            this.translateY = event.getY() - this.startY;
+    private Selection selection;
+    private DragContext dragContext;
+    public MoveFactory(Selection selection,DragContext dragContext) {
+        this.selection = selection;
+        this.dragContext = dragContext;
+    }
+
+    public EventHandler<MouseEvent> makeDragHandler() {
+
+        return event -> {
+            selection.addTransform(new Translate(event.getX()-dragContext.getAnchorX(),event.getY()-dragContext.getAnchorY()));
         };
     }
 
-    public EventHandler<MouseEvent> makeHandler(Group group) {
-        group.getTransforms().add(new Translate(this.translateX, this.translateY));
-        return move;
-    }
 
-    public double getStartX() {
-        return startX;
-    }
-
-    public double getStartY() {
-        return startY;
-    }
-
-    public double getTranslateX() {
-        return translateX;
-    }
-
-    public double getTranslateY() {
-        return translateY;
-    }
 }

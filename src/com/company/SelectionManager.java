@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class SelectionManager {
     private static SelectionManager ourInstance;
-    private HashMap<Selection, Selection> selections;
+    private List<Selection> selections;
 
     public static SelectionManager getInstance() {
         if (ourInstance == null)
@@ -22,13 +22,19 @@ public class SelectionManager {
     }
 
     public void add(Selection selection) {
-        selections.putIfAbsent(selection, selection);
+        selections.add(selection);
     }
 
-    public void remove(Selection selection) {
-        selections.remove(selection);
+    public void cancelAll()
+    {
+        selections.forEach(Selection::cancel);
+        for (int i = 0; i <selections.size() ; i++) {
+            selections.remove(i);
+        }
     }
-
+    public void remove(Selection selection) {selections.remove(selection);}
+    public List<Selection> getSelections(){return selections;}
+/*
     public boolean isSelected(Shape shape) {
         Selection required = Selection.fromSingleShape(shape);//check this siwii
         if (selections.containsKey(required)) return true;
@@ -36,8 +42,6 @@ public class SelectionManager {
             if (selections.get(selection).getBounds().contains(required.getBounds())) return true;
         return false;
     }
+*/
 
-    public Iterator<Selection> getIterator() {
-        return selections.keySet().iterator();
-    }
 }

@@ -1,101 +1,145 @@
 package com.company;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+import javafx.scene.shape.*;
+import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.scene.transform.Transform;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by ADMIN on 4/24/2016.
  */
 
 public class Selection {
-    private Rectangle selectionRect;
-    private List<Shape> shapes;
+    private Group selectionGroup;
+    private SelectionGroupBuilder selectionGroupBuilder;
+    private DragContext startAnchor;
+    private final double padding = 5;//padding of rectangle
 
     private Selection(double x, double y) {
-        shapes = new ArrayList<>();
-        selectionRect = new Rectangle(x, y);
-        selectionRect.
-        format();
+        selectionGroupBuilder = new SelectionGroupBuilder(this);
+        startAnchor = new DragContext();
+        selectionGroup = new Group();
+        selectionGroupBuilder.makeSelectionRect(x,y);
     }
 
-    public static Selection fromSingleShape(Shape shape) {
-        Bounds bounds = shape.getBoundsInLocal();
-        Selection selection = fromStartPoint(bounds.getMinX(), bounds.getMinY());
-        selection.setStop(bounds.getMaxX() - bounds.getMinX(), bounds.getMaxY() - bounds.getMinY());
-        selection.shapes.add(shape);
+    public static Selection fromStartPoint(double x, double y)
+    {
+        Selection selection = new Selection(x, y);
+        selection.startAnchor.setAnchorX(x);
+        selection.startAnchor.setAnchorY(y);
         return selection;
     }
+    public void addRect(){DrawingCanvas.getInstance().getCanvas().getChildren().add(selectionGroupBuilder.getSelectionRect());}
+    public void expandRectToPos(double x,double y)
+    {
+        selectionGroupBuilder.getSelectionRect().setWidth(x - startAnchor.getAnchorX());
+        selectionGroupBuilder.getSelectionRect().setHeight(y - startAnchor.getAnchorY());
+    }
+    public void submitSelection() {
+        selectionGroup
+                .getChildren()
+                .addAll(DrawingCanvas.getInstance()
+                .getCanvas()
+                        .getChildren()
+                        .stream().filter(node ->
+                ( selectionGroupBuilder.getSelectionRect().getBoundsInLocal().contains(node.getBoundsInLocal())
+                || node.intersects( selectionGroupBuilder.getSelectionRect().getBoundsInLocal()))
+                && ! selectionGroupBuilder.getSelectionRect().equals(node)).collect(Collectors.toList()));
 
-    public static Selection fromStartPoint(double X, double Y) {
-        return new Selection(X, Y);
+        DrawingCanvas.getInstance().getCanvas().getChildren().add(selectionGroup);
+        selectionGroup.getChildren().add(selectionGroupBuilder.buildSelectionHandleGroup());
+        SelectionManager.getInstance().add(this);
     }
 
-    public void setStop(double X, double Y) {
-        selectionRect.setWidth(X - selectionRect.getX());
-        selectionRect.setHeight(Y - selectionRect.getY());
-        Bounds bounds = selectionRect.getBoundsInLocal();
-        Iterator<Node> drawings = DrawingCanvas.getInstance().getShapes();
-        double maxX = X, maxY = Y, minX = selectionRect.getX(), minY = selectionRect.getY();
-        while (drawings.hasNext()) {
-            Shape currentShape = (Shape) drawings.next();
-            Bounds currentBounds = currentShape.getBoundsInLocal();
-            if (bounds.contains(currentBounds) || bounds.intersects(currentBounds)) {
-                shapes.add(currentShape);
-                if (currentBounds.getMaxX() > maxX) maxX = currentBounds.getMaxX();
-                if (currentBounds.getMaxY() > maxY) maxY = currentBounds.getMaxY();
-                if (currentBounds.getMinX() < minX) minX = currentBounds.getMinX();
-                if (currentBounds.getMinY() > minY) minY = currentBounds.getMinY();
-            }
-        }
-        selectionRect.setX(minX);
-        selectionRect.setY(maxY);
-        selectionRect.setWidth(maxX - minX);
-        selectionRect.setHeight(maxY - minY);
+    public void cancel()
+    {
+        selectionGroup.getChildren().remove(selectionGroupBuilder.getAccessoryGroup());
+        DrawingCanvas.getInstance().getCanvas().getChildren().remove(selectionGroup);
+        DrawingCanvas.getInstance().getCanvas().getChildren().addAll(selectionGroup.getChildren());
+        SelectionManager.getInstance().remove(this);
     }
 
-    public Iterator<Shape> getShapesIterator() {
-        return shapes.iterator();
-    }
-
-    public List<Shape> getShapes(){return shapes;}
+    public List<Node> getShapes(){return selectionGroup.getChildren().subList(0,selectionGroup.getChildren().size());}
 
     public Bounds getBounds() {
-        return selectionRect.getBoundsInLocal();
+        return selectionGroup.getBoundsInLocal();
     }
 
-    private void format() {
-        selectionRect.setFill(null);
-        selectionRect.setStroke(Color.BLACK);
+    public void addTransform(Transform transform)
+    {
+        selectionGroup.getTransforms().add(transform);
     }
 
-    public void addTransform(Transform trans) {
-        selectionRect.getTransforms().add(trans);
-        while (getShapesIterator().hasNext()) {
-            getShapesIterator().next().getTransforms().add(trans);
+    public List<Transform> getTransforms(){return selectionGroup.getTransforms();}
+    public void removeTransformsFrom(int start){
+        for (int i = start; i <getTransforms().size() ; i++)
+            getTransforms().remove(i);
+
+    }
+    public void reverseTransform(Transform transform)
+    {
+        try {
+            selectionGroup.getTransforms().add(transform.createInverse());
+        } catch (NonInvertibleTransformException e) {
+            e.printStackTrace();
         }
     }
 
-    public Rectangle getSelectionRect() {
-        return selectionRect;
-    }
+    public Point2D getOpposite(Point2D anchor)
+    {
+        Point2D opposite = null;
 
-    public void removeTransform(Transform trans) {
-        selectionRect.getTransforms().remove(trans);
-        while (getShapesIterator().hasNext()) {
-            getShapesIterator().next().getTransforms().remove(trans);
-        }
+        if (anchor.equals(getUpperLeft())) opposite =  getLowerRight();
+
+        else if (anchor.equals(getLowerLeft())) opposite =  getUpperLeft();
+
+        else if (anchor.equals(getUpperRight())) opposite = getLowerLeft();
+
+        else if (anchor.equals(getLowerRight())) opposite =  getUpperLeft();
+
+        else if(anchor.equals(getMidLower())) opposite =  getMidUpper();
+
+        else if(anchor.equals(getMidUpper())) opposite = getMidLower();
+
+        else if(anchor.equals(getMidRight())) opposite =  getMidLeft();
+
+        else if (anchor.equals(getMidLeft())) opposite =  getMidRight();
+
+        return opposite;
     }
+    //getters for handle positions
+    public Point2D getRotationHandlePos(){return new Point2D(getMidUpper().getX(),getMidUpper().getY()-4*padding);}
+    public Point2D getUpperLeft(){return new Point2D(getBounds().getMaxX(),getBounds().getMaxY());}
+    public Point2D getLowerRight(){return new Point2D(getBounds().getMinX(),getBounds().getMinY());}
+    public Point2D getUpperRight(){return new Point2D(getUpperLeft().getX()+getBounds().getWidth(),getUpperLeft().getY());}
+    public Point2D getLowerLeft(){return new Point2D(getUpperLeft().getX(),getUpperLeft().getY()+getBounds().getHeight());}
+    public Point2D getMidRight(){return new Point2D(getUpperLeft().getX()+getBounds().getWidth(),getUpperLeft().getY()+getBounds().getHeight()/2);}
+    public Point2D getMidLeft(){return new Point2D(getBounds().getMaxX(),getBounds().getMaxY()+getBounds().getHeight()/2);}
+    public Point2D getMidUpper(){return  new Point2D(getBounds().getMaxX()+getBounds().getWidth()/2,getBounds().getMaxY());}
+    public Point2D getMidLower(){return new Point2D(getUpperLeft().getX()+getBounds().getWidth()/2,getUpperLeft().getY()+getBounds().getHeight());}
+   //methods to add and remove event handlers
+    public void addOnDrag(EventHandler<MouseEvent> drag){selectionGroup.addEventHandler(MouseEvent.MOUSE_DRAGGED,drag);}
+    public void removeOnDrag(EventHandler<MouseEvent> drag){selectionGroup.removeEventHandler(MouseEvent.MOUSE_DRAGGED,drag);}
+    public void addOnPressed(EventHandler<MouseEvent> press){selectionGroup.addEventHandler(MouseEvent.MOUSE_PRESSED,press);}
+    public void removeOnPressed(EventHandler<MouseEvent> press){selectionGroup.removeEventHandler(MouseEvent.MOUSE_PRESSED,press);}
+    public void addOnRelease(EventHandler<MouseEvent> release){selectionGroup.addEventHandler(MouseEvent.MOUSE_RELEASED,release);}
+    public void removeOnRelease(EventHandler<MouseEvent> release){selectionGroup.removeEventHandler(MouseEvent.MOUSE_RELEASED,release);}
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -104,12 +148,12 @@ public class Selection {
 
         Selection selection = (Selection) o;
 
-        return selectionRect.equals(selection.selectionRect);
+        return selectionGroup.equals(selection.selectionGroup);
     }
 
     @Override
     public int hashCode() {
-        return selectionRect.hashCode();
+        return selectionGroup.hashCode();
     }
 
 }

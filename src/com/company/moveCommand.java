@@ -10,24 +10,36 @@ import javafx.scene.input.MouseEvent;
  */
 public class moveCommand implements Command {
 
-    private EventHandler<MouseEvent> move;
+    private EventHandler<MouseEvent> press;
+    private EventHandler<MouseEvent> release;
+    private TemporaryEventHolder<EventHandler<MouseEvent>> drag = new TemporaryEventHolder<>();
+    private DragContext dragContext = new DragContext();
+    private int startTransformIndex[] = new int[1];
+    private Selection selection;
 
-    public moveCommand(Group group) {
-        group.setOnMouseDragged(event -> {
-            MoveFactory moveFactory = new MoveFactory(group);
-            move = moveFactory.makeHandler(group);
-            group.setCursor(Cursor.MOVE);
-        });
-        group.setOnMouseDragReleased(event -> group.removeEventHandler(MouseEvent.MOUSE_DRAGGED, move));
+    public moveCommand(Selection selection) {
+        this.selection = selection;
+        press =event->
+        {
+            startTransformIndex[0] = selection.getTransforms().size();
+            dragContext.setAnchorX(event.getX());
+            dragContext.setAnchorY(event.getY());
+            drag.setEvent(new MoveFactory(selection,dragContext).makeDragHandler());
+            selection.addOnDrag(drag.getEvent());
+        };
+        release = event -> selection.removeOnDrag(drag.getEvent());
+
     }
 
     @Override
     public void execute() {
-        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_DRAGGED, move);
+        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_PRESSED, press);
+        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED, release);
+
     }
 
     @Override
     public void undo() {
-
+        selection.removeTransformsFrom(startTransformIndex[0]);
     }
 }
