@@ -1,27 +1,27 @@
 package com.company;
 
+import javafx.scene.shape.Shape;
 import javafx.scene.shape.Polygon;
 
 /**
  * Created by user on 4/25/2016.
  */
-public class CopyablePolygon implements CopyableShape {
+public class CopyablePolygon extends CopyableShape {
 
-    private Polygon polygon;
+    public CopyablePolygon(Shape copyableShape) {
+        super(copyableShape);
+    }
 
     @Override
     public void copy() {
-        Polygon polygon2 = new Polygon();
-        polygon2.getPoints().addAll(polygon.getPoints());
-        polygon2.setStyle(polygon.getStyle());
-        ShapeClipboard.getInstance().set(polygon2);
+        Shape polygon = new CopyablePolygon(new Polygon());
+        ((Polygon) polygon).getPoints().addAll(((Polygon) copyableShape).getPoints());
+        ((Polygon) polygon).setStyle(copyableShape.getStyle());
+        ShapeClipboard.getInstance().set(polygon);
     }
 
-    public Polygon getPolygon() {
-        return polygon;
-    }
-
-    public void setPolygon(Polygon polygon) {
-        this.polygon = polygon;
+    @Override
+    public com.sun.javafx.geom.Shape impl_configShape() {
+        return null;
     }
 }

@@ -6,23 +6,23 @@ import javafx.scene.shape.Shape;
 /**
  * Created by ADMIN on 4/24/2016.
  */
-public class CopyableCircle implements CopyableShape {
-    private Circle circle;
+public class CopyableCircle extends CopyableShape {
+
+    public CopyableCircle(Shape copyableShape) {
+        super(copyableShape);
+    }
 
     @Override
     public void copy() {
-        Circle circle2 = new Circle();
-        circle2.setCenterX(circle.getCenterX());
-        circle2.setCenterY(circle.getCenterY());
-        circle2.setStyle(circle.getStyle());
-        ShapeClipboard.getInstance().set(circle2);
+        Shape circle = new CopyableCircle(new Circle());
+        ((Circle) circle).setCenterX(((Circle) copyableShape).getCenterX());
+        ((Circle) circle).setCenterY(((Circle) copyableShape).getCenterY());
+        circle.setStyle(((Circle) copyableShape).getStyle());
+        ShapeClipboard.getInstance().set(circle);
     }
 
-    public Circle getCircle() {
-        return circle;
-    }
-
-    public void setCircle(Circle circle) {
-        this.circle = circle;
+    @Override
+    public com.sun.javafx.geom.Shape impl_configShape() {
+        return null;
     }
 }

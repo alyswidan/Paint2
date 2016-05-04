@@ -18,7 +18,7 @@ public class DrawingClickFactory {
         double pivot[] = new double[2];
         String style = "-fx-stroke:black;-fx-fill:null;-fx-stroke-width:1px;";
         if (string.compareToIgnoreCase("Circle") == 0) {
-            shape = new Circle();
+            shape = new CopyableCircle(new Circle());
             shape.setStyle(style);
             click = event ->
             {
@@ -33,7 +33,7 @@ public class DrawingClickFactory {
                 };
             };
         } else if (string.compareToIgnoreCase("rectangle") == 0) {
-            shape = new Rectangle();
+            shape = new CopyableRectangle(new Rectangle());
             shape.setStyle(style);
             click = event -> {
                 ((Rectangle) shape).setX(event.getX());
@@ -48,7 +48,7 @@ public class DrawingClickFactory {
                 };
             };
         } else if (string.compareToIgnoreCase("square") == 0) {
-            shape = new Rectangle();
+            shape = new CopyableRectangle(new Rectangle());
             shape.setStyle(style);
             click = event -> {
                 ((Rectangle) shape).setX(event.getX());
@@ -64,7 +64,7 @@ public class DrawingClickFactory {
                 };
             };
         } else if (string.compareToIgnoreCase("ellipse") == 0) {
-            shape = new Ellipse();
+            shape = new CopyableEllipse(new Ellipse());
             shape.setStyle(style);
             click = event -> {
                 ((Ellipse) shape).setCenterX(event.getX());
@@ -81,7 +81,7 @@ public class DrawingClickFactory {
                 };
             };
         } else if (string.compareToIgnoreCase("line") == 0) {
-            shape = new Line();
+            shape = new CopyableLine(new Line());
             shape.setStyle(style);
             click = event -> {
                 ((Line) shape).setStartX(event.getX());
@@ -94,23 +94,48 @@ public class DrawingClickFactory {
                 };
             };
         } else if (string.compareToIgnoreCase("polygon") == 0) {
-            shape = new Polygon();
+            shape = new CopyablePolygon(new Polygon());
             shape.setStyle(style);
             click = event -> {
-                ((Polygon)shape).getPoints().addAll(event.getX(), event.getY());
+                ((Polygon) shape).getPoints().addAll(event.getX(), event.getY());
                 pivot[0] = event.getX();
                 pivot[1] = event.getY();
             };
         } else if (string.compareToIgnoreCase("triangle") == 0) {
-            shape = new Polygon();
+            shape = new CopyablePolygon(new Polygon());
             shape.setStyle(style);
             click = event -> {
-                ((Polygon)shape).getPoints().addAll(event.getX(), event.getY());
+                ((Polygon) shape).getPoints().addAll(event.getX(), event.getY());
                 pivot[0] = event.getX();
                 pivot[1] = event.getY();
             };
+        } else if (string.compareToIgnoreCase("righttriangle") == 0) {
+            shape = new CopyablePolygon(new Polygon());
+            shape.setStyle(style);
+            click = event -> {
+                ((Polygon) shape).getPoints().addAll(event.getX(), event.getY());
+                pivot[0] = event.getX();
+                pivot[1] = event.getY();
+                drag = e -> {
+                    ((Polygon) shape).getPoints().addAll(pivot[0], e.getY(), e.getX(), e.getY());
+                };
+            };
+        } else if (string.compareToIgnoreCase("isoscelestriangle") == 0) {
+            shape = new CopyablePolygon(new Polygon());
+            shape.setStyle(style);
+            click = event -> {
+                ((Polygon) shape).getPoints().addAll(event.getX(), event.getY());
+                pivot[0] = event.getX();
+                pivot[1] = event.getY();
+                drag = e -> {
+                    if (e.getX() > pivot[0]) {
+                        ((Polygon) shape).getPoints().addAll(e.getX(), e.getY(), e.getX() - pivot[0], e.getY());
+                    } else {
+                        ((Polygon) shape).getPoints().addAll(e.getX(), e.getY(), e.getX() + pivot[0], e.getY());
+                    }
+                };
+            };
         }
-
         DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_DRAGGED, drag);
         return click;
     }
