@@ -13,14 +13,12 @@ public class DeleteCommand implements Command {
 
     @Override
     public void execute() {
-        DrawingCanvas.getInstance().getCanvas().getChildren().remove(selection.getShapes());
-        //yet to push in the stack
+        selection.delete();
     }
 
     @Override
     public void undo() {
-        //the undo is to draw the deleted shape again
-
+        selection.add();
     }
 
     @Override

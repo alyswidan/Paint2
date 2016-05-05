@@ -1,6 +1,9 @@
 package com.company;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.scene.transform.Rotate;
@@ -10,28 +13,39 @@ import javafx.scene.transform.Rotate;
  */
 public class RotateCommand implements Command {
     private Selection selection;
-    private Rotate rotate;
+    private EventHandler<MouseEvent> press;
+    private EventHandler<MouseEvent> drag;
+    private EventHandler<MouseEvent> release;
+    int startTransformIndex[] = new int[1];
 
 
-    public RotateCommand(Selection selection, double angle) {
+    public RotateCommand(Selection selection) {
+        drag = event -> {
+            Point2D delta = new Point2D(event.getX(),event.getY()).subtract(selection.getRotationHandlePos());
+            selection.addTransform(new Rotate(Math.atan2(delta.getY(),delta.getX())));
+        };
+
+        release = event -> {
+            selection.removeOnDrag(drag);
+        };
+        press = event -> {
+            startTransformIndex[0] = selection.getTransforms().size();
+            if(new Point2D(event.getX(),event.getY()).equals(selection.getRotationHandlePos()))
+                selection.addOnDrag(drag);
+        };
+
         this.selection = selection;
-        Bounds bounds = selection.getBounds();
-        rotate = new Rotate(angle, (bounds.getMinX() + bounds.getWidth()) / 2, (bounds.getMinY() + bounds.getHeight()) / 2);
+
     }
 
     @Override
     public void execute() {
-        selection.addTransform(rotate);
-
+        selection.addOnPressed(press);
+        selection.addOnRelease(release);
     }
 
     @Override
     public void undo() {
-        //shape.getTransforms().remove(rotate);
-        try {
-            selection.addTransform(rotate.createInverse());
-        } catch (NonInvertibleTransformException e) {
-            e.printStackTrace();
-        }
+        selection.removeTransformsFrom(startTransformIndex[0]);
     }
 }

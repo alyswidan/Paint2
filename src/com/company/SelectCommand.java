@@ -18,7 +18,8 @@ public class SelectCommand implements Command {
         press = event -> {
             if(SelectionManager.getInstance().getSelections().size()>0)
             {
-                SelectionManager.getInstance().cancelAll();
+                if(!SelectionManager.getInstance().isInSelection(event.getX(),event.getY()).isPresent())
+                     SelectionManager.getInstance().cancelAll();
                 DrawingCanvas.getInstance().getCanvas().removeEventHandler(MouseEvent.MOUSE_RELEASED,release);
             }
             else {

@@ -11,12 +11,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.scene.transform.Transform;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -50,15 +52,27 @@ public class Selection {
         selectionGroupBuilder.getSelectionRect().setHeight(y - startAnchor.getAnchorY());
     }
     public void submitSelection() {
+        Predicate<Node> boundsCheck = node ->  selectionGroupBuilder.
+                getSelectionRect().
+                getBoundsInLocal().
+                contains(node.getBoundsInLocal());
+        Predicate<Node>selectionRectEquality = selectionGroupBuilder.getSelectionRect()::equals;
+
         selectionGroup
                 .getChildren()
                 .addAll(DrawingCanvas.getInstance()
                 .getCanvas()
                         .getChildren()
-                        .stream().filter(node ->
-                ( selectionGroupBuilder.getSelectionRect().getBoundsInLocal().contains(node.getBoundsInLocal())
-                || node.intersects( selectionGroupBuilder.getSelectionRect().getBoundsInLocal()))
-                && ! selectionGroupBuilder.getSelectionRect().equals(node)).collect(Collectors.toList()));
+                        .stream()
+                        .filter(
+                                boundsCheck.
+                                or(node -> node.
+                                intersects( selectionGroupBuilder.getSelectionRect().getBoundsInLocal()))
+                                .and(selectionRectEquality)
+                                .negate())
+                                        .collect(Collectors.toList()));
+
+
 
         DrawingCanvas.getInstance().getCanvas().getChildren().add(selectionGroup);
         selectionGroup.getChildren().add(selectionGroupBuilder.buildSelectionHandleGroup());
@@ -73,6 +87,17 @@ public class Selection {
         SelectionManager.getInstance().remove(this);
     }
 
+    public void add()
+    {
+        DrawingCanvas.getInstance().getCanvas().getChildren().add(selectionGroup);
+    }
+    public boolean contains(double x,double y){return selectionGroup.getBoundsInLocal().contains(x,y);}
+    public void delete()
+    {
+        SelectionManager.getInstance().remove(this);
+        DrawingCanvas.getInstance().getCanvas().getChildren().remove(selectionGroup);
+    }
+
     public List<Node> getShapes(){return selectionGroup.getChildren().subList(0,selectionGroup.getChildren().size());}
 
     public Bounds getBounds() {
@@ -84,7 +109,9 @@ public class Selection {
         selectionGroup.getTransforms().add(transform);
     }
 
+
     public List<Transform> getTransforms(){return selectionGroup.getTransforms();}
+
     public void removeTransformsFrom(int start){
         for (int i = start; i <getTransforms().size() ; i++)
             getTransforms().remove(i);

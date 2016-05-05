@@ -14,6 +14,7 @@ public class ResizeFactory {
 
     private Point2D start, pivot;
     private Selection selection;
+
     private void setParameters(Point2D start,Point2D pivot) {
         this.start = start;
         this.pivot = pivot;

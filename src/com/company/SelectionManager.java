@@ -28,20 +28,13 @@ public class SelectionManager {
     public void cancelAll()
     {
         selections.forEach(Selection::cancel);
-        for (int i = 0; i <selections.size() ; i++) {
-            selections.remove(i);
-        }
+        selections.forEach(selections::remove);
     }
     public void remove(Selection selection) {selections.remove(selection);}
     public List<Selection> getSelections(){return selections;}
-/*
-    public boolean isSelected(Shape shape) {
-        Selection required = Selection.fromSingleShape(shape);//check this siwii
-        if (selections.containsKey(required)) return true;
-        for (Selection selection : selections.keySet())
-            if (selections.get(selection).getBounds().contains(required.getBounds())) return true;
-        return false;
+    public Optional<Selection> isInSelection(double x,double y)
+    {
+        return selections.stream().filter(selection -> selection.contains(x,y)).findFirst();
     }
-*/
 
 }

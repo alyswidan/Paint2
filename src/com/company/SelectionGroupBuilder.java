@@ -24,7 +24,7 @@ public class SelectionGroupBuilder {
 
     public Rectangle makeSelectionRect(double x,double y)
     {
-         this.selectionRect = new Rectangle(x,y);
+        this.selectionRect = new Rectangle(x,y);
         selectionRect.setStyle("-fx-stroke:black;-fx-fill:transparent;-fx-stroke-width:1px;");
         return selectionRect;
     }
