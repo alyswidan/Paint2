@@ -1,30 +1,31 @@
 package com.company;
 
+import javafx.scene.shape.Shape;
 import javafx.scene.shape.Ellipse;
 
 /**
  * Created by user on 4/25/2016.
  */
-public class CopyableEllipse implements CopyableShape {
+public class CopyableEllipse extends CopyableShape {
 
-    Ellipse ellipse;
+    public CopyableEllipse(Shape copyableShape) {
+        super(copyableShape);
+    }
 
     @Override
     public void copy() {
-        Ellipse ellipse2 = new Ellipse();
-        ellipse2.setCenterX(ellipse.getCenterX());
-        ellipse2.setCenterY(ellipse.getCenterY());
-        ellipse2.setRadiusX(ellipse.getRadiusX());
-        ellipse2.setRadiusY(ellipse.getRadiusY());
-        ellipse2.setStyle(ellipse.getStyle());
-        ShapeClipboard.getInstance().set(ellipse2);
+        Shape ellipse = new CopyableEllipse(new Ellipse());
+        ((Ellipse) ellipse).setCenterX(((Ellipse) copyableShape).getCenterX());
+        ((Ellipse) ellipse).setCenterY(((Ellipse) copyableShape).getCenterY());
+        ((Ellipse) ellipse).setRadiusX(((Ellipse) copyableShape).getRadiusX());
+        ((Ellipse) ellipse).setRadiusY(((Ellipse) copyableShape).getRadiusY());
+        ((Ellipse) ellipse).setStyle(copyableShape.getStyle());
+        ShapeClipboard.getInstance().set(ellipse);
     }
 
-    public Ellipse getEllipse() {
-        return ellipse;
-    }
 
-    public void setEllipse(Ellipse ellipse) {
-        this.ellipse = ellipse;
+    @Override
+    public com.sun.javafx.geom.Shape impl_configShape() {
+        return null;
     }
 }
