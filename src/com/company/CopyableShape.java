@@ -12,6 +12,7 @@ public abstract class CopyableShape extends Shape {
         this.copyableShape = copyableShape;
     }
 
-    abstract CopyableShape copy();
+    //should return copyableshape but not yet updated
+    abstract void copy();
 
 }
