@@ -13,12 +13,14 @@ public class CopyableCircle extends CopyableShape {
     }
 
     @Override
-    public void copy() {
-        Shape circle = new CopyableCircle(new Circle());
-        ((Circle) circle).setCenterX(((Circle) copyableShape).getCenterX());
-        ((Circle) circle).setCenterY(((Circle) copyableShape).getCenterY());
-        circle.setStyle(((Circle) copyableShape).getStyle());
-        ShapeClipboard.getInstance().set(circle);
+    public CopyableShape copy() {
+        Circle circle = new Circle(((Circle) copyableShape).getCenterX(),
+                                    ((Circle) copyableShape).getCenterY(),
+                                    ((Circle) copyableShape).getRadius());
+        circle.setStyle(copyableShape.getStyle());
+        CopyableShape copyOfCircle = new CopyableCircle(circle);
+        ShapeClipboard.getInstance().set(copyOfCircle);
+        return copyOfCircle;
     }
 
     @Override

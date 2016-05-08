@@ -75,7 +75,7 @@ public class Selection {
 
 
         DrawingCanvas.getInstance().getCanvas().getChildren().add(selectionGroup);
-        selectionGroup.getChildren().add(selectionGroupBuilder.buildSelectionHandleGroup());
+        selectionGroup.getChildren().add(selectionGroupBuilder.submitRectangle().buildSelectionHandleGroup());
         SelectionManager.getInstance().add(this);
     }
 

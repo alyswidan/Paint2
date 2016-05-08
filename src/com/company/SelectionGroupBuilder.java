@@ -29,12 +29,12 @@ public class SelectionGroupBuilder {
         return selectionRect;
     }
 
-    public Rectangle submitRectangle() {
+    public SelectionGroupBuilder submitRectangle() {
         selectionRect.setX(selection.getUpperLeft().getX() - padding);
         selectionRect.setY(selection.getUpperLeft().getY() - padding);
         selectionRect.setWidth(selection.getUpperRight().getX() - selection.getUpperLeft().getX() + padding);
         selectionRect.setHeight(selection.getLowerLeft().getY() - selection.getLowerRight().getY() + padding);
-        return selectionRect;
+        return this;
     }
 
     public Rectangle getSelectionRect() {

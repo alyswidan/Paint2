@@ -33,9 +33,8 @@ public class moveCommand implements Command {
 
     @Override
     public void execute() {
-        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_PRESSED, press);
-        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED, release);
-
+        selection.addOnPressed(press);
+        selection.addOnRelease(release);
     }
 
     @Override

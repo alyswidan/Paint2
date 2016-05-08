@@ -14,11 +14,13 @@ public class CopyableLine extends CopyableShape {
     }
 
     @Override
-    public void copy() {
-        Shape line = new CopyableLine(new Line(((Line) copyableShape).getStartX(), ((Line) copyableShape).getStartY()
-                , ((Line) copyableShape).getEndX(), ((Line) copyableShape).getEndY()));
-        line.setStyle(((Line) copyableShape).getStyle());
+    public CopyableShape copy() {
+        Line line = new Line(((Line) copyableShape).getStartX(), ((Line) copyableShape).getStartY()
+                , ((Line) copyableShape).getEndX(), ((Line) copyableShape).getEndY());
+        line.setStyle((copyableShape).getStyle());
+        CopyableShape cpyOfLine = new CopyableLine(line);
         ShapeClipboard.getInstance().set(line);
+        return cpyOfLine;
     }
 
     @Override

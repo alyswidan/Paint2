@@ -8,20 +8,22 @@ import javafx.scene.shape.Rectangle;
  */
 public class CopyableRectangle extends CopyableShape {
 
-    public CopyableRectangle(javafx.scene.shape.Shape copyableShape) {
+    public CopyableRectangle(Shape copyableShape) {
         super(copyableShape);
     }
 
     @Override
-    public void copy() {
-        Shape rectangle = new CopyableRectangle(new Rectangle());
-        ((Rectangle)rectangle).setX(((Rectangle)copyableShape).getX());
-        ((Rectangle)rectangle).setY(((Rectangle)copyableShape).getY());
-        ((Rectangle)rectangle).setWidth(((Rectangle)copyableShape).getWidth());
-        ((Rectangle)rectangle).setHeight(((Rectangle)copyableShape).getHeight());
-        ((Rectangle)rectangle).setStyle(((Rectangle)copyableShape).getStyle());
+    public CopyableShape copy() {
+        Rectangle rectangle = new Rectangle(((Rectangle)copyableShape).getX(),
+                                            ((Rectangle)copyableShape).getY(),
+                                            ((Rectangle)copyableShape).getWidth(),
+                                            ((Rectangle)copyableShape).getHeight());
+        rectangle.setStyle(copyableShape.getStyle());
+        CopyableShape  copyOfRect= new CopyableRectangle(rectangle);
         ShapeClipboard.getInstance().set(rectangle);
+        return copyOfRect;
     }
+
 
     @Override
     public com.sun.javafx.geom.Shape impl_configShape() {

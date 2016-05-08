@@ -13,11 +13,13 @@ public class CopyablePolygon extends CopyableShape {
     }
 
     @Override
-    public void copy() {
-        Shape polygon = new CopyablePolygon(new Polygon());
-        ((Polygon) polygon).getPoints().addAll(((Polygon) copyableShape).getPoints());
-        ((Polygon) polygon).setStyle(copyableShape.getStyle());
+    public CopyableShape copy() {
+        Polygon polygon = new Polygon();
+        polygon.getPoints().addAll(((Polygon) copyableShape).getPoints());
+        polygon.setStyle(copyableShape.getStyle());
+        CopyableShape copyOfPolygon = new CopyablePolygon(polygon);
         ShapeClipboard.getInstance().set(polygon);
+        return copyOfPolygon;
     }
 
     @Override

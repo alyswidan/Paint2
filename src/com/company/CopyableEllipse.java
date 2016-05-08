@@ -13,14 +13,16 @@ public class CopyableEllipse extends CopyableShape {
     }
 
     @Override
-    public void copy() {
-        Shape ellipse = new CopyableEllipse(new Ellipse());
-        ((Ellipse) ellipse).setCenterX(((Ellipse) copyableShape).getCenterX());
-        ((Ellipse) ellipse).setCenterY(((Ellipse) copyableShape).getCenterY());
-        ((Ellipse) ellipse).setRadiusX(((Ellipse) copyableShape).getRadiusX());
-        ((Ellipse) ellipse).setRadiusY(((Ellipse) copyableShape).getRadiusY());
-        ((Ellipse) ellipse).setStyle(copyableShape.getStyle());
+    public CopyableShape copy() {
+        Ellipse ellipse = new Ellipse(((Ellipse) copyableShape).getCenterX(),
+                                    ((Ellipse) copyableShape).getCenterY(),
+                                    ((Ellipse) copyableShape).getRadiusX(),
+                                    ((Ellipse) copyableShape).getRadiusY());
+        ellipse.setStyle(copyableShape.getStyle());
+        CopyableShape copyOfEllipse = new CopyableEllipse(ellipse);
         ShapeClipboard.getInstance().set(ellipse);
+        return copyOfEllipse;
+
     }
 
 
