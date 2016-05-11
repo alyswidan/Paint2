@@ -11,25 +11,25 @@ import javafx.util.Pair;
  * Created by Amr on 4/27/2016.
  */
 public class DrawCommand implements Command {
-    private EventHandler<MouseEvent> click;
-    private EventHandler<MouseEvent> release;
+    private MouseEvent event;
+    private String shape;
+    private DrawingClickFactory clickFactory;
 
-    public DrawCommand(String shape) {
-        double pivot[] = new double[2];
-        DrawingClickFactory clickFactory = new DrawingClickFactory();
-        click = clickFactory.makeHandler(shape);
-        DrawingReleaseFactory releaseFactory = new DrawingReleaseFactory();
-        release = releaseFactory.makeHandler(shape, clickFactory);
+    public DrawCommand(String shape,MouseEvent event) {
+        this.shape = shape;
+        this.event = event;
+        clickFactory = new DrawingClickFactory();
+
     }
 
     @Override
     public void execute() {
-        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_CLICKED, click);
-        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED, release);
+        (clickFactory.makeHandler(shape)).handle(event);
+        (new DrawingReleaseFactory().makeHandler(shape,clickFactory)).handle(event);
     }
 
     @Override
     public void undo() {
-
+        DrawingCanvas.getInstance().getCanvas().getChildren().remove(clickFactory.getShape());
     }
 }

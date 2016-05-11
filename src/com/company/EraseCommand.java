@@ -26,7 +26,6 @@ public class EraseCommand implements Command{
             eraser.setTranslateY(event.getY());
             DrawingCanvas.getInstance().getCanvas().getChildren().add(eraser);
         };
-
     }
 
 

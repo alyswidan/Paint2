@@ -3,10 +3,10 @@ package com.company;
 /**
  * Created by Amr on 4/25/2016.
  */
-public class DeleteCommand implements Command {
+public class DeleteCommand extends EditCommand {
 
     private Selection selection;
-
+    public DeleteCommand(){}
     public DeleteCommand(Selection selection) {
         this.selection = selection;
     }

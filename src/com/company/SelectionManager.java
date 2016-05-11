@@ -19,6 +19,7 @@ public class SelectionManager {
     }
 
     private SelectionManager() {
+        selections = new ArrayList<>();
     }
 
     public void add(Selection selection) {

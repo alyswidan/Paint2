@@ -1,29 +1,23 @@
 package com.company;
 
-import javafx.scene.Node;
-
-import java.util.Arrays;
-import java.util.Collection;
-
 /**
  * Created by user on 4/26/2016.
  */
-public class PasteCommand implements Command{
+public class PasteCommand implements Command {
 
     Selection selection;
 
-    public PasteCommand(Selection selection) {
-        this.selection = selection;
+    public PasteCommand() {
+        this.selection = ShapeClipboard.getInstance().get();
     }
 
     @Override
     public void execute() {
-
-        DrawingCanvas.getInstance().getCanvas().getChildren().addAll(selection.getShapes());
+        selection.add();
     }
 
     @Override
     public void undo() {
-
+        selection.delete();
     }
 }

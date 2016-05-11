@@ -12,6 +12,7 @@ public class DrawingCanvas {
     private static DrawingCanvas ourInstance;
     private Pane canvas;
 
+
     public static DrawingCanvas getInstance() {
         if (ourInstance == null) ourInstance = new DrawingCanvas();
         return ourInstance;
@@ -27,5 +28,7 @@ public class DrawingCanvas {
 
     private DrawingCanvas() {
         canvas = new Pane();
+       
+
     }
 }

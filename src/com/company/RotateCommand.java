@@ -1,5 +1,6 @@
 package com.company;
 
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -13,39 +14,32 @@ import javafx.scene.transform.Rotate;
  */
 public class RotateCommand implements Command {
     private Selection selection;
-    private EventHandler<MouseEvent> press;
+    private MouseEvent event;
     private EventHandler<MouseEvent> drag;
-    private EventHandler<MouseEvent> release;
-    int startTransformIndex[] = new int[1];
+    int startTransformIndex;
 
 
-    public RotateCommand(Selection selection) {
-        drag = event -> {
-            Point2D delta = new Point2D(event.getX(),event.getY()).subtract(selection.getRotationHandlePos());
-            selection.addTransform(new Rotate(Math.atan2(delta.getY(),delta.getX())));
-        };
-
-        release = event -> {
-            selection.removeOnDrag(drag);
-        };
-        press = event -> {
-            startTransformIndex[0] = selection.getTransforms().size();
-            if(new Point2D(event.getX(),event.getY()).equals(selection.getRotationHandlePos()))
-                selection.addOnDrag(drag);
-        };
-
+    public RotateCommand(Selection selection,MouseEvent event) {
+        this.event = event;
         this.selection = selection;
-
     }
 
     @Override
     public void execute() {
-        selection.addOnPressed(press);
-        selection.addOnRelease(release);
-    }
+        drag = e -> {
+            Point2D delta = new Point2D(e.getX(),e.getY()).subtract(selection.getRotationHandlePos());
+            selection.addTransform(new Rotate(Math.atan2(delta.getY(),delta.getX())));
+        };
+        startTransformIndex= selection.getTransforms().size();
+        if(new Point2D(((MouseEvent)event).getX(),((MouseEvent)event).getY()).equals(selection.getRotationHandlePos()))
+            selection.addOnDrag(drag);
+        selection.addOnRelease(e -> selection.removeOnDrag(drag));
 
+    }
     @Override
     public void undo() {
-        selection.removeTransformsFrom(startTransformIndex[0]);
+        selection.removeTransformsFrom(startTransformIndex);
     }
+
+
 }

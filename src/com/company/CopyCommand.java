@@ -3,21 +3,22 @@ package com.company;
 /**
  * Created by ADMIN on 4/24/2016.
  */
-public class CopyCommand implements Command {
-    private CopyableShape copyable;
-
-    public CopyCommand(CopyableShape copyable) {
-        this.copyable = copyable;
+public class CopyCommand extends EditCommand {
+    private Selection selection;
+    public CopyCommand(){}
+    public CopyCommand(Selection selection) {
+        this.selection = selection;
     }
 
     @Override
     public void execute() {
-        copyable.copy();
+        ShapeClipboard.getInstance().set(selection);
+        selection.copy();
     }
 
     @Override
     public void undo() {
-        ShapeClipboard.getInstance().clear();
+        ShapeClipboard.getInstance().undoLast();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.company;
 
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -14,31 +15,29 @@ public class moveCommand implements Command {
     private EventHandler<MouseEvent> release;
     private TemporaryEventHolder<EventHandler<MouseEvent>> drag = new TemporaryEventHolder<>();
     private DragContext dragContext = new DragContext();
-    private int startTransformIndex[] = new int[1];
+    private int startTransformIndex;
     private Selection selection;
+    private MouseEvent event;
 
-    public moveCommand(Selection selection) {
+
+    public moveCommand(Selection selection,MouseEvent event) {
         this.selection = selection;
-        press =event->
-        {
-            startTransformIndex[0] = selection.getTransforms().size();
-            dragContext.setAnchorX(event.getX());
-            dragContext.setAnchorY(event.getY());
-            drag.setEvent(new MoveFactory(selection,dragContext).makeDragHandler());
-            selection.addOnDrag(drag.getEvent());
-        };
-        release = event -> selection.removeOnDrag(drag.getEvent());
+        this.event = event;
 
     }
 
     @Override
     public void execute() {
-        selection.addOnPressed(press);
-        selection.addOnRelease(release);
+        startTransformIndex = selection.getTransforms().size();
+        dragContext.setAnchorX(event.getX());
+        dragContext.setAnchorY(event.getY());
+        drag.setEvent(new MoveFactory(selection,dragContext).makeDragHandler());
+        selection.addOnDrag(drag.getEvent());
+        selection.addOnRelease(e -> selection.removeOnDrag(drag.getEvent()));
     }
 
     @Override
     public void undo() {
-        selection.removeTransformsFrom(startTransformIndex[0]);
+        selection.removeTransformsFrom(startTransformIndex);
     }
 }

@@ -15,32 +15,31 @@ import javafx.scene.transform.Scale;
 public class ResizeCommand implements Command {
 
     private TemporaryEventHolder<EventHandler<MouseEvent>> dragEvent = new TemporaryEventHolder<>();
-    private EventHandler<MouseEvent> pressEvent;
     private Selection selection;
-    private int startTransformIndex[] = new int[1];
+    private int startTransformIndex;
+    private MouseEvent event;
 
-    public ResizeCommand(Selection selection) {
+
+    public ResizeCommand(Selection selection,MouseEvent event) {
         this.selection = selection;
-        pressEvent = event -> {
-            // record the number of transforms when mouse is pressed
-            //undoing is just removing the transforms added in the drag handler
-            startTransformIndex[0] = selection.getTransforms().size();
-            dragEvent.setEvent(new ResizeFactory(new Point2D(event.getX(), event.getY()), selection).makeHandler());
-            selection.addOnDrag(dragEvent.getEvent());
-            selection.addOnPressed(pressEvent);
-        };
-            selection.addOnRelease(e -> selection.removeOnDrag(dragEvent.getEvent()));
-            //group.setOnMouseExited(event -> group.setCursor(Cursor.E_RESIZE));
+        this.event = event;
+
     }
     @Override
     public void execute() {
-        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_PRESSED, pressEvent);
+        // record the number of transforms when mouse is pressed
+        //undoing is just removing the transforms added in the drag handler
+        startTransformIndex = selection.getTransforms().size();
+        dragEvent.setEvent(new ResizeFactory(new Point2D(event.getX(),
+                            event.getY()), selection).makeHandler());
+        selection.addOnDrag(dragEvent.getEvent());
+        selection.addOnRelease(e -> selection.removeOnDrag(dragEvent.getEvent()));
     }
 
     @Override
     public void undo() {
         //remove all transforms added due to this command being executed
-        selection.removeTransformsFrom(startTransformIndex[0]);
+        selection.removeTransformsFrom(startTransformIndex);
     }
 
 }
