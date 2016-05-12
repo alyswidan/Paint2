@@ -32,9 +32,6 @@ public class DrawingCanvas {
         return canvas;
     }
 
-    public Iterator<Node> getShapes() {
-        return getCanvas().getChildren().iterator();
-    }
 
     private ContextMenu makeContextMenu() {
         ContextMenu menu = new ContextMenu();
@@ -65,8 +62,10 @@ public class DrawingCanvas {
     }
 
     public void addShape(BridgeShape shape){
-        canvas.getChildren().add(shape.getShape());
+        canvas.getChildren().add(shape.shape);
     }
+
+    public List<BridgeShape> getShapes(){return canvas.getChildren().stream().map(node -> );}
 
     private DrawingCanvas() {
         canvas = new Pane();

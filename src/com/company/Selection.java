@@ -28,7 +28,7 @@ import java.util.stream.Stream;
  */
 
 public class Selection {
-    private Group selectionGroup;
+    private BridgeGroup selectionGroup;
     private SelectionGroupBuilder selectionGroupBuilder;
     private DragContext startAnchor;
     private final double padding = 5;//padding of rectangle
@@ -36,7 +36,7 @@ public class Selection {
     private Selection(double x, double y) {
         selectionGroupBuilder = new SelectionGroupBuilder(this);
         startAnchor = new DragContext();
-        selectionGroup = new Group();
+        selectionGroup = new BridgeGroup();
         selectionGroupBuilder.makeSelectionRect(x, y);
     }
 
@@ -48,10 +48,10 @@ public class Selection {
         return selection;
     }
 
-    private static Selection fromCopyableShapes(List<CopyableShape> shapes) {
+    private static Selection fromShapes(List<BridgeShape> shapes) {
         //(0,0) is the default paste position, could be changed later
         Selection selection = new Selection(0, 0);
-        selection.selectionGroup.getChildren().addAll(shapes.stream().map(CopyableShape::copy).collect(Collectors.toList()));
+        selection.selectionGroup.addAll(shapes.stream().map(BridgeShape::copy).collect(Collectors.toList()));
         selection.expandRectToPos(selection.getLowerRight().getX(), selection.getLowerRight().getY());
         selection.submitSelection();
         return selection;
@@ -66,44 +66,21 @@ public class Selection {
     }
 
     public void addRect() {
-        DrawingCanvas.getInstance().getCanvas().getChildren().add(selectionGroupBuilder.getSelectionRect());
+        DrawingCanvas.getInstance().addShape(selectionGroupBuilder.getSelectionRect());
     }
 
     public void expandRectToPos(double x, double y) {
-        Rectangle s = selectionGroupBuilder.getSelectionRect();
-
-        if (x > startAnchor.getAnchorX() && y > startAnchor.getAnchorY()) {
-            s.setX(startAnchor.getAnchorX());
-            s.setY(startAnchor.getAnchorY());
-            s.setHeight(y - startAnchor.getAnchorY());
-            s.setWidth(x - startAnchor.getAnchorX());
-        } else if (x < startAnchor.getAnchorX() && y < startAnchor.getAnchorY()) {
-            s.setX(x);
-            s.setY(y);
-            s.setHeight(startAnchor.getAnchorY() - y);
-            s.setWidth(startAnchor.getAnchorX() - x);
-        } else if (x > startAnchor.getAnchorX() && y < startAnchor.getAnchorY()) {
-            s.setX(startAnchor.getAnchorX());
-            s.setY(y);
-            s.setWidth(x - startAnchor.getAnchorX());
-            s.setHeight(startAnchor.getAnchorY() - y);
-        } else {
-            s.setX(x);
-            s.setY(startAnchor.getAnchorY());
-            s.setWidth(startAnchor.getAnchorX() - x);
-            s.setHeight(y - startAnchor.getAnchorY());
-        }
+        selectionGroupBuilder.getSelectionRect().expendToPosition(x,y);
     }
 
     public void getSelection() {
-        Predicate<Node> boundsCheck = node -> selectionGroupBuilder.
+        Predicate<BridgeShape> boundsCheck = shape -> selectionGroupBuilder.
                 getSelectionRect().
                 getBoundsInLocal().
-                contains(node.getBoundsInLocal());
-        Predicate<Node> selectionRectEquality = selectionGroupBuilder.getSelectionRect()::equals;
+                contains(shape.getBoundsInLocal());
+        Predicate<BridgeShape> selectionRectEquality = selectionGroupBuilder.getSelectionRect()::equals;
 
         selectionGroup
-                .getChildren()
                 .addAll(DrawingCanvas.getInstance()
                         .getCanvas()
                         .getChildren()

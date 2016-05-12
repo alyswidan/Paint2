@@ -22,7 +22,7 @@ public abstract class BridgeShape {
 
     public Paint getFill(){return shape.getFill();}
     public void setStrokeDetails(Stroke stroke) {
-        shape.setStyle(stroke.getStrokeWidth() + stroke.getStrokeStyle());
+        shape.setStyle("-fx-stroke:"+stroke.getColor()+";-fx-stroke-width:"+stroke.getStrokeWidth()+"px;");
     }
 
     public Stroke getStrokeDetails(){
@@ -43,6 +43,26 @@ public abstract class BridgeShape {
 
     public Selection select(){
         return Selection.fromShape(shape);
+    }
+
+    public boolean intersects(Bounds localBounds) {
+        return shape.intersects(localBounds);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BridgeShape that = (BridgeShape) o;
+
+        return shape != null ? shape.equals(that.shape) : that.shape == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return shape != null ? shape.hashCode() : 0;
     }
 
     public abstract BridgeShape copy();

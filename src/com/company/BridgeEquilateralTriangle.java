@@ -1,4 +1,4 @@
-package com.company.images;
+package com.company;
 
 import com.company.BridgeTriangle;
 import javafx.geometry.Point2D;

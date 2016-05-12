@@ -2,10 +2,12 @@ package com.company;
 
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import sun.corba.Bridge;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,16 +18,17 @@ import java.util.List;
 public class SelectionGroupBuilder {
     private Selection selection;
     private final double anchorRadius = 5, padding = 5;
-    private Rectangle selectionRect;
-    private Group accessoryGroup;
+    private BridgeRectangle selectionRect;
+    private BridgeGroup accessoryGroup;
 
     public SelectionGroupBuilder(Selection selection) {
         this.selection = selection;
     }
 
-    public Rectangle makeSelectionRect(double x, double y) {
-        this.selectionRect = new Rectangle(x, y);
-        selectionRect.setStyle("-fx-stroke:black;-fx-fill:transparent;-fx-stroke-width:1px;");
+    public BridgeRectangle makeSelectionRect(double x, double y) {
+        selectionRect = new BridgeRectangle(x, y);
+        selectionRect.setStrokeDetails(new Stroke(1, Color.BLACK));
+        selectionRect.fill(Color.TRANSPARENT);
         return selectionRect;
     }
 
@@ -37,24 +40,24 @@ public class SelectionGroupBuilder {
         return this;
     }
 
-    public Rectangle getSelectionRect() {
+    public BridgeRectangle getSelectionRect() {
         return selectionRect;
     }
 
-    private Circle makeAnchor(Point2D position) {
-        return new Circle(position.getX(), position.getY(), anchorRadius);
+    private BridgrCircle makeAnchor(Point2D position) {
+        return new BridgrCircle(position.getX(), position.getY(), anchorRadius);
     }
 
-    private Circle makeRotationHandle() {
-        return new Circle(selection.getRotationHandlePos().getX(), selection.getRotationHandlePos().getY(), anchorRadius);
+    private BridgrCircle makeRotationHandle() {
+        return new BridgrCircle(selection.getRotationHandlePos().getX(), selection.getRotationHandlePos().getY(), anchorRadius);
     }
 
-    private Line makeRotationStick() {
-        return new Line(selection.getMidUpper().getX(), selection.getMidUpper().getY(),
+    private BridgeLine makeRotationStick() {
+        return new BridgeLine(selection.getMidUpper().getX(), selection.getMidUpper().getY(),
                 selection.getRotationHandlePos().getX(), selection.getRotationHandlePos().getY());
     }
 
-    private List<Shape> makeAnchors() {
+    private List<BridgeShape> makeAnchors() {
         return Arrays.asList(
                 makeAnchor(selection.getLowerLeft()),
                 makeAnchor(selection.getLowerRight()),
@@ -66,21 +69,21 @@ public class SelectionGroupBuilder {
                 makeAnchor(selection.getMidUpper()));
     }
 
-    public List<Shape> getSelectionAccessories() {
-        List<Shape> accessories = makeAnchors();
+    public List<BridgeShape> getSelectionAccessories() {
+        List<BridgeShape> accessories = makeAnchors();
         accessories.add(makeRotationHandle());
         accessories.add(makeRotationStick());
         return accessories;
     }
 
-    public Group buildSelectionHandleGroup() {
-        accessoryGroup = new Group();
-        accessoryGroup.getChildren().add(selectionRect);
-        accessoryGroup.getChildren().addAll(getSelectionAccessories());
+    public BridgeGroup buildSelectionHandleGroup() {
+        accessoryGroup = new BridgeGroup();
+        accessoryGroup.addShape(selectionRect);
+        accessoryGroup.addAll(getSelectionAccessories());
         return accessoryGroup;
     }
 
-    public Group getAccessoryGroup() {
+    public BridgeGroup getAccessoryGroup() {
         return accessoryGroup;
     }
 }

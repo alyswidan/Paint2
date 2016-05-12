@@ -1,4 +1,4 @@
-package com.company.images;
+package com.company;
 
 import com.company.BridgeShape;
 import javafx.scene.shape.Ellipse;
@@ -13,5 +13,10 @@ public class BridgeEllipse extends BridgeShape {
         shape = new Ellipse();
         ((Ellipse) shape).setRadiusX(raduisX);
         ((Ellipse) shape).setRadiusY(raduisY);
+    }
+
+    @Override
+    public BridgeShape copy() {
+        return null;
     }
 }
