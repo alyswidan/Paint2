@@ -1,7 +1,6 @@
 package com.company;
 
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.transform.Translate;
 

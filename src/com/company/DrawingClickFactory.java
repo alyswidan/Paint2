@@ -3,7 +3,6 @@ package com.company;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.*;
-import javafx.scene.transform.Scale;
 
 /**
  * Created by Amr on 4/27/2016.

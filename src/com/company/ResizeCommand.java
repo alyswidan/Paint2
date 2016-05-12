@@ -1,13 +1,8 @@
 package com.company;
 
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
-import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.transform.NonInvertibleTransformException;
-import javafx.scene.transform.Scale;
 
 /**
  * Created by ADMIN on 4/25/2016.

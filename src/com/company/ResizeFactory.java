@@ -2,7 +2,6 @@ package com.company;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
-import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.transform.Scale;
 import javafx.scene.transform.Transform;

@@ -1,6 +1,5 @@
 package com.company;
 
-import javafx.scene.input.Clipboard;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
