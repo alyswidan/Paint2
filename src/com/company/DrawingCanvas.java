@@ -44,6 +44,7 @@ public class DrawingCanvas {
                 forEach(menuItem -> menuItem.setOnAction(event -> EditCommandsInvoker.getInstance().
                         execute(CommandTypes.valueOf(menuItem.getText().toUpperCase()))));
         return menu;
+
     }
     private void init()
     {
