@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ToolBar layoutY="25.0" prefHeight="120.0" prefWidth="1273.0" />
+        <ToolBar layoutY="25.0" prefHeight="120.0" prefWidth="1360.0" />
         <GridPane layoutX="10.0" layoutY="48.0" prefHeight="90.0" prefWidth="150.0">
             <children>
                 <ToggleButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="32.0" prefWidth="50.0" text="ToggleButton">
@@ -232,5 +230,6 @@
                     </image>
                 </ImageView>
             </graphic></Button>
+      <ListView layoutX="1130.0" layoutY="48.0" prefHeight="90.0" prefWidth="220.0" />
     </children>
 </Pane>

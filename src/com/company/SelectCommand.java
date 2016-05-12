@@ -2,7 +2,6 @@ package com.company;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Shape;
 
 /**
  * Created by ADMIN on 4/25/2016.

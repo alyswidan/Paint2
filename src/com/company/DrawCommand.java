@@ -1,11 +1,7 @@
 package com.company;
 
-import javafx.beans.binding.IntegerBinding;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Shape;
-import javafx.scene.transform.Scale;
-import javafx.util.Pair;
 
 /**
  * Created by Amr on 4/27/2016.

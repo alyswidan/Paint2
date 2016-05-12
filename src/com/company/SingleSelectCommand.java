@@ -4,8 +4,6 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 
-import java.nio.file.WatchEvent;
-
 /**
  * Created by ADMIN on 4/25/2016.
  */
