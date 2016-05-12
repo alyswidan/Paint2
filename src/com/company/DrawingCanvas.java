@@ -36,37 +36,34 @@ public class DrawingCanvas {
         return getCanvas().getChildren().iterator();
     }
 
-    private ContextMenu makeContextMenu()
-    {
+    private ContextMenu makeContextMenu() {
         ContextMenu menu = new ContextMenu();
-        menu.getItems().addAll(new MenuItem("Copy"), new MenuItem("Paste"),new MenuItem("delete"));
+        menu.getItems().addAll(new MenuItem("Copy"), new MenuItem("Paste"), new MenuItem("delete"));
         menu.getItems().
                 forEach(menuItem -> menuItem.setOnAction(event -> EditCommandsInvoker.getInstance().
                         execute(CommandTypes.valueOf(menuItem.getText().toUpperCase()))));
         return menu;
 
     }
-    private void init()
-    {
+
+    private void init() {
         ContextMenu menu = makeContextMenu();
         boolean isOpen[] = new boolean[1];
 
-        canvas.setOnMousePressed(event ->{
+        canvas.setOnMousePressed(event -> {
 
 
-            if(event.getButton().equals(MouseButton.SECONDARY))
-            {
-                if(event.getTarget() instanceof Shape)
+            if (event.getButton().equals(MouseButton.SECONDARY)) {
+                if (event.getTarget() instanceof Shape)
                     EditCommandsInvoker.getInstance().setSelection(Selection.fromShape((Shape) event.getTarget()));
-                isOpen[0]=true;
-                menu.show(canvas,event.getScreenX(),event.getScreenY());
-            }
-            else
-            {
-                if(isOpen[0])menu.hide();
+                isOpen[0] = true;
+                menu.show(canvas, event.getScreenX(), event.getScreenY());
+            } else {
+                if (isOpen[0]) menu.hide();
             }
         });
     }
+
     private DrawingCanvas() {
         canvas = new Pane();
         init();
