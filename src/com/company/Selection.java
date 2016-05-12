@@ -40,7 +40,7 @@ public class Selection {
         selectionGroupBuilder.makeSelectionRect(x,y);
     }
 
-    private static Selection fromShape(Shape shape)
+    public static Selection fromShape(Shape shape)
     {
         Bounds bounds = shape.getBoundsInLocal();
         Selection selection = new Selection(bounds.getMinX(),bounds.getMinY());
@@ -70,8 +70,39 @@ public class Selection {
     public void addRect(){DrawingCanvas.getInstance().getCanvas().getChildren().add(selectionGroupBuilder.getSelectionRect());}
     public void expandRectToPos(double x,double y)
     {
-        selectionGroupBuilder.getSelectionRect().setWidth(x - startAnchor.getAnchorX());
-        selectionGroupBuilder.getSelectionRect().setHeight(y - startAnchor.getAnchorY());
+        Rectangle s = selectionGroupBuilder.getSelectionRect();
+
+        if(x>startAnchor.getAnchorX() && y >startAnchor.getAnchorY())
+        {
+            s.setX(startAnchor.getAnchorX());
+            s.setY(startAnchor.getAnchorY());
+            s.setHeight(y - startAnchor.getAnchorY());
+            s.setWidth(x - startAnchor.getAnchorX());
+        }
+
+        else if(x<startAnchor.getAnchorX() && y<startAnchor.getAnchorY())
+        {
+            s.setX(x);
+            s.setY(y);
+            s.setHeight(startAnchor.getAnchorY()-y);
+            s.setWidth(startAnchor.getAnchorX()-x);
+        }
+
+        else if(x>startAnchor.getAnchorX() && y<startAnchor.getAnchorY())
+        {
+            s.setX(startAnchor.getAnchorX());
+            s.setY(y);
+            s.setWidth(x-startAnchor.getAnchorX());
+            s.setHeight(startAnchor.getAnchorY()-y);
+        }
+
+        else
+        {
+            s.setX(x);
+            s.setY(startAnchor.getAnchorY());
+            s.setWidth(startAnchor.getAnchorX()-x);
+            s.setHeight(y-startAnchor.getAnchorY());
+        }
     }
 
     public void getSelection()

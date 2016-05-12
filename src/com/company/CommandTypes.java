@@ -5,4 +5,10 @@ package com.company;
  */
 public enum CommandTypes {
     COPY,PASTE,DELETE,CUT;
+
+
+    @Override
+    public String toString() {
+        return this.name().toLowerCase();
+    }
 }
