@@ -11,7 +11,8 @@ public class SingleSelectCommand implements Command {
     private EventHandler<MouseEvent> singleSelectHandler;
     SingleSelectCommand()
     {
-        singleSelectHandler = event -> SelectionManager.getInstance().add(Selection.fromSingleShape((Shape) event.getSource()));
+        //BridgeShape mot shape
+        singleSelectHandler = event -> SelectionManager.getInstance().add(Selection.fromShape((BridgeShape) event.getSource()));
     }
     @Override
     public void execute() {

@@ -40,7 +40,7 @@ public class Selection {
         selectionGroupBuilder.makeSelectionRect(x, y);
     }
 
-    public static Selection fromShape(Shape shape) {
+    public static Selection fromShape(BridgeShape shape) {//from shape to BridgeShape
         Bounds bounds = shape.getBoundsInLocal();
         Selection selection = new Selection(bounds.getMinX(), bounds.getMinY());
         selection.expandRectToPos(bounds.getMaxX(), bounds.getMaxY());
@@ -96,7 +96,7 @@ public class Selection {
 
     public void submitSelection() {
 
-        DrawingCanvas.getInstance().getCanvas().getChildren().add(selectionGroup);
+        DrawingCanvas.getInstance().getCanvas().getChildren().add(selectionGroup);selectionGroup.addAll();
         selectionGroup.getChildren().add(selectionGroupBuilder.submitRectangle().buildSelectionHandleGroup());
         SelectionManager.getInstance().add(this);
         addOnClick(SelectionCommandsInvoker.getInstance()::execute);

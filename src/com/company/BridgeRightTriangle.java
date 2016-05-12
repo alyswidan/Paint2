@@ -12,6 +12,13 @@ public class BridgeRightTriangle extends BridgePolygon {
         super();
     }
 
+    public BridgeRightTriangle(double startX,double startY,double endX,double endY){
+        setStartX(startX);
+        setStartY(startY);
+        setEndX(endX);
+        setEndY(endY);
+    }
+
     public void expandToPosition(double x, double y){
         setEndX(x);
         setEndY(y);
@@ -65,5 +72,12 @@ public class BridgeRightTriangle extends BridgePolygon {
 
     public void setBaseY(double baseY) {
         ((Polygon)shape).getPoints().set(5,baseY);
+    }
+
+    @Override
+    public BridgeRightTriangle copy(){
+        BridgeRightTriangle rightTriangle = new BridgeRightTriangle(getStartX(),getStartY(),getEndX(),getEndY());
+        rightTriangle.fill(getFill());
+        return rightTriangle;
     }
 }

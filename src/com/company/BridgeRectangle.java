@@ -69,6 +69,7 @@ public class BridgeRectangle extends BridgeShape {
     {
         return ((Rectangle) shape).getY();
     }
+
     @Override
     public BridgeRectangle copy()
     {
