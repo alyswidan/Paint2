@@ -52,6 +52,7 @@ public class DrawingCanvas {
 
         canvas.setOnMousePressed(event ->{
 
+
             if(event.getButton().equals(MouseButton.SECONDARY))
             {
                 if(event.getTarget() instanceof Shape)
