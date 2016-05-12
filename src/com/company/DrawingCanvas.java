@@ -64,6 +64,10 @@ public class DrawingCanvas {
         });
     }
 
+    public void addShape(BridgeShape shape){
+        canvas.getChildren().add(shape.getShape());
+    }
+
     private DrawingCanvas() {
         canvas = new Pane();
         init();
