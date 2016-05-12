@@ -16,8 +16,7 @@ public class BridgePolygon extends BridgeShape {
         return ((Polygon)shape).getPoints();
     }
 
-
-
+    @Override
     public BridgePolygon copy(){
         BridgePolygon polygon = new BridgePolygon();
         polygon.getPoints().addAll(this.getPoints());

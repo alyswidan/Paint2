@@ -55,6 +55,7 @@ public class DrawingClickFactory {
                 double dx = e.getX() - pivot.getAnchorX();
                 double dy = e.getY() - pivot.getAnchorY();
                 double dh = Math.sqrt(dx * dx + dy * dy);
+
                 ((Rectangle) shape).setWidth(dh * Math.cos(45));
                 ((Rectangle) shape).setHeight(dh * Math.sin(45));
             };

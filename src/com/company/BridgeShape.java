@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.geometry.Bounds;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 
 /**
@@ -15,10 +16,11 @@ public abstract class BridgeShape {
     protected Shape shape;
     private Stroke stroke;
 
-    public void fill(Color color) {
+    public void fill(Paint color) {
         shape.setFill(color);
     }
 
+    public Paint getFill(){return shape.getFill();}
     public void setStrokeDetails(Stroke stroke) {
         shape.setStyle(stroke.getStrokeWidth() + stroke.getStrokeStyle());
     }
@@ -42,4 +44,6 @@ public abstract class BridgeShape {
     public Selection select(){
         return Selection.fromShape(shape);
     }
+
+    public abstract BridgeShape copy();
 }
