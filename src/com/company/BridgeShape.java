@@ -23,6 +23,10 @@ public abstract class BridgeShape {
         shape.setStyle(stroke.getStrokeWidth() + stroke.getStrokeStyle());
     }
 
+    public Stroke getStrokeDetails(){
+        return stroke;
+    }
+
     public <T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
         shape.addEventHandler(eventType, eventHandler);
     }
@@ -36,6 +40,6 @@ public abstract class BridgeShape {
     }
 
     public Selection select(){
-
+        return Selection.fromShape(shape);
     }
 }

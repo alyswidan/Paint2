@@ -1,5 +1,6 @@
 package com.company;
 
+import javafx.collections.ObservableList;
 import javafx.scene.shape.Polygon;
 
 /**
@@ -7,13 +8,20 @@ import javafx.scene.shape.Polygon;
  */
 public class BridgePolygon extends BridgeShape {
 
-    Polygon polygon;
-
     public BridgePolygon() {
-
+        shape = new Polygon();
     }
 
+    public ObservableList<Double> getPoints() {
+        return ((Polygon)shape).getPoints();
+    }
+
+
+
     public BridgePolygon copy(){
-        
+        BridgePolygon polygon = new BridgePolygon();
+        polygon.getPoints().addAll(this.getPoints());
+        polygon.setStrokeDetails(this.getStrokeDetails());
+        return  polygon;
     }
 }
