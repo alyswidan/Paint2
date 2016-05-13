@@ -57,7 +57,7 @@ public class SelectionGroupBuilder {
                 selection.getRotationHandlePos().getX(), selection.getRotationHandlePos().getY());
     }
 
-    private List<BridgeShape> makeAnchors() {
+    private List<BridgeNode> makeAnchors() {
         return Arrays.asList(
                 makeAnchor(selection.getLowerLeft()),
                 makeAnchor(selection.getLowerRight()),
@@ -69,8 +69,8 @@ public class SelectionGroupBuilder {
                 makeAnchor(selection.getMidUpper()));
     }
 
-    public List<BridgeShape> getSelectionAccessories() {
-        List<BridgeShape> accessories = makeAnchors();
+    public List<BridgeNode> getSelectionAccessories() {
+        List<BridgeNode> accessories = makeAnchors();
         accessories.add(makeRotationHandle());
         accessories.add(makeRotationStick());
         return accessories;
@@ -78,7 +78,7 @@ public class SelectionGroupBuilder {
 
     public BridgeGroup buildSelectionHandleGroup() {
         accessoryGroup = new BridgeGroup();
-        accessoryGroup.addShape(selectionRect);
+        accessoryGroup.addChild(selectionRect);
         accessoryGroup.addAll(getSelectionAccessories());
         return accessoryGroup;
     }

@@ -13,8 +13,6 @@ import javafx.stage.Stage;
  */
 public class Controller {
 
-    private Stage primaryStage;
-
     @FXML
     private ToggleButton line, rectangle, square, righttriangle, isoscelestriangle,
             equilateraltriangle, circle, ellipse, polygon, select, fill, erase;
@@ -36,14 +34,8 @@ public class Controller {
     @FXML
     private GridPane gridShape;
 
-    public Controller(Stage primaryStage)
-    {
-        this.primaryStage = primaryStage;
-    }
-
     @FXML
     public void initialize(){
-        primaryStage.setMaximized(true);
         line.setSelected(true);
         strokeWidth.setText("1");
         colorPicker.setValue(Color.WHITE);
@@ -75,6 +67,22 @@ public class Controller {
         else if(actionEvent.getTarget().equals(select) || actionEvent.getTarget().equals(select)
                 || actionEvent.getTarget().equals(select)){
             handleTools(actionEvent.getTarget());
+        }
+    }
+
+    @FXML
+    public void handleClipboard(ActionEvent actionEvent){
+        if(actionEvent.getTarget().equals(copy)){
+
+        }
+        else if(actionEvent.getTarget().equals(cut)){
+
+        }
+        else if(actionEvent.getTarget().equals(paste)){
+
+        }
+        else if(actionEvent.getTarget().equals(delete)){
+
         }
     }
 

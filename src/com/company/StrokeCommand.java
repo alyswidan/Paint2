@@ -5,7 +5,10 @@ package com.company;
  */
 public class StrokeCommand implements Command {
 
-    
+    @Override
+    public void redo() {
+
+    }
 
     @Override
     public void execute() {

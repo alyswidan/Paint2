@@ -22,6 +22,11 @@ public class DeleteCommand extends EditCommand {
     }
 
     @Override
+    public void redo() {
+
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }

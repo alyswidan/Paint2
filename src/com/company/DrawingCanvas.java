@@ -63,6 +63,7 @@ public class DrawingCanvas {
 
     private DrawingCanvas() {
         canvas = new BridgePane();
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED,CanvasCommandsInvoker.getInstance()::execute);
         init();
     }
 }

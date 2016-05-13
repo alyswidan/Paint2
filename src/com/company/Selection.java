@@ -66,11 +66,11 @@ public class Selection {
     }
 
     public void addRect() {
-        DrawingCanvas.getInstance().addChild(selectionGroupBuilder.getSelectionRect());
+        DrawingCanvas.getInstance().getCanvas().addChild(selectionGroupBuilder.getSelectionRect());
     }
 
     public void expandRectToPos(double x, double y) {
-        selectionGroupBuilder.getSelectionRect().expendToPosition(x,y);
+        selectionGroupBuilder.getSelectionRect().expandToPosition(x,y);
     }
 
     public void getSelection() {

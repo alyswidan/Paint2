@@ -17,20 +17,12 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("fxml_example.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("Design.fxml"));
         Scene scene = new Scene(root, 300, 275);
-
         primaryStage.setTitle("Paint");
         primaryStage.setScene(scene);
+        primaryStage.setMaximized(true);
         primaryStage.show();
-
-        
     }
 }

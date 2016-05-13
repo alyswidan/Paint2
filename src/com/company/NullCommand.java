@@ -7,6 +7,11 @@ package com.company;
  */
 public class NullCommand implements Command {
     @Override
+    public void redo() {
+
+    }
+
+    @Override
     public void execute() {
 
     }

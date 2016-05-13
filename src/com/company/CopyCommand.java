@@ -11,6 +11,11 @@ public class CopyCommand extends EditCommand {
     }
 
     @Override
+    public void redo() {
+
+    }
+
+    @Override
     public void execute() {
         ShapeClipboard.getInstance().set(selection);
         selection.copy();
