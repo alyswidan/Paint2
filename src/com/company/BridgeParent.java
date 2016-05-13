@@ -5,7 +5,9 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.geometry.Bounds;
 import javafx.scene.Parent;
+import javafx.scene.layout.Background;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,7 +17,8 @@ import java.util.List;
 public abstract class BridgeParent extends BridgeNode
 {
 
-    List<BridgeNode> children;
+    List<BridgeNode> children = new ArrayList<>();
+
 
     public abstract void addChild(BridgeNode node);
 

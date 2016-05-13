@@ -16,7 +16,7 @@ import java.util.Stack;
 public class CanvasCommandsInvoker implements Invoker, Observable {
 
     private CanvasCommandsManager manager = new CanvasCommandsManager();
-    private static CanvasCommandsInvoker invoker;
+    private static CanvasCommandsInvoker invoker = new CanvasCommandsInvoker();
     private CanvasCommandsTypes currentType;
     private List<Observer> observers = new ArrayList<>();
     Stack<Command> undoCommands = new Stack<>();
@@ -26,14 +26,14 @@ public class CanvasCommandsInvoker implements Invoker, Observable {
     }
 
     public static CanvasCommandsInvoker getInstance() {
-        if (invoker == null) {
-            invoker = new CanvasCommandsInvoker();
-        }
+
         return invoker;
     }
 
     public void execute(MouseEvent event) {
+        System.out.println("hello");
         Command command = new NullCommand();
+        System.out.println(currentType == null);
         if (currentType.equals(CanvasCommandsTypes.DRAW))
             command = new DrawCommand(getShape(), event);
         else if (currentType.equals(CanvasCommandsTypes.ERASE))
@@ -59,6 +59,7 @@ public class CanvasCommandsInvoker implements Invoker, Observable {
     }
 
     public void setShape(ShapeTypes shape) {
+        System.out.println(shape);
         manager.setShape(shape);
     }
 

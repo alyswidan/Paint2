@@ -12,21 +12,26 @@ public class DrawingClickFactory {
 
     private BridgeShape shape;
     private EventHandler<MouseEvent> drag = null;
-    private EventHandler<MouseEvent> click;
 
     public EventHandler<MouseEvent> makeHandler(ShapeTypes type) {
 
         shape = type.makeShape();
-        click = event -> shape.setStart(event.getX(),event.getY());
-        drag = event -> shape.expandToPosition(event.getX(),event.getY());
+        drag = event ->
+        {
+            System.out.println("sarah");
+            shape.expandToPosition(event.getX(),event.getY());
+        };
 
         EventType<MouseEvent> eventType;
         if(type.equals(ShapeTypes.POLYGON))eventType = MouseEvent.MOUSE_MOVED;
         else eventType = MouseEvent.MOUSE_DRAGGED;
 
         return event -> {
-            click.handle(event);
+            shape.setStart(event.getX(),event.getY());
+            DrawingCanvas.getInstance().getCanvas().addChild(shape);
+
             DrawingCanvas.getInstance().getCanvas().addEventHandler(eventType, drag);
+            //DrawingCanvas.getInstance().getCanvas().node.setOnMouseMoved(drag);
         };
     }
 

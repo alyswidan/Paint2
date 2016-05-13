@@ -15,14 +15,15 @@ public class DrawCommand implements Command {
         this.shape = shape;
         this.event = event;
         clickFactory = new DrawingClickFactory();
-
     }
 
     @Override
     public void execute() {
         (clickFactory.makeHandler(shape)).handle(event);
-        (new DrawingReleaseFactory().makeHandler(clickFactory)).handle(event);
-        clickFactory.getShape().select();
+        System.out.println("bola");
+        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED,
+                new DrawingReleaseFactory().makeHandler(clickFactory));
+       // clickFactory.getShape().select();
     }
 
     @Override

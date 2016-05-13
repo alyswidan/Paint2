@@ -11,6 +11,10 @@ import java.util.Collection;
  */
 public class BridgeGroup extends BridgeParent {
 
+    public BridgeGroup() {
+        node = new Group();
+    }
+
     @Override
     public void addChild(BridgeNode child)
     {

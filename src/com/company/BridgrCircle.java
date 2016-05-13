@@ -30,7 +30,7 @@ public class BridgrCircle extends BridgeShape {
     }
 
     public BridgrCircle() {
-
+        node = new Circle();
     }
 
 

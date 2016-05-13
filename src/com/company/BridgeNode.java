@@ -11,7 +11,7 @@ import javafx.scene.transform.Transform;
 /**
  * Created by ADMIN on 5/13/2016.
  */
-public class BridgeNode {
+public abstract class BridgeNode {
     Node node;
     public void requestFocus() {
         node.requestFocus();
