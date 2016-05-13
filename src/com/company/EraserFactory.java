@@ -8,5 +8,5 @@ import javafx.scene.shape.Shape;
 @FunctionalInterface
 public interface EraserFactory {
     //imagine each eraser being inscribed in a circle to generify the design to any shape
-    Shape makeEraser();
+    BridgeShape makeEraser();
 }

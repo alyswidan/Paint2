@@ -25,21 +25,28 @@ public abstract class BridgeShape extends BridgeNode {
         node.setStyle("-fx-stroke:"+stroke.getColor()+";-fx-stroke-width:"+stroke.getStrokeWidth()+"px;");
     }
 
+    public void setTranslateY(double value) {
+        node.setTranslateY(value);
+    }
+
+    public void setTranslateX(double value) {
+        node.setTranslateX(value);
+    }
 
     public Stroke getStrokeDetails(){
         return stroke;
     }
 
     public <T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
-        ((Shape)node).addEventHandler(eventType, eventHandler);
+        node.addEventHandler(eventType, eventHandler);
     }
 
     public <T extends Event> void removeEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
-        ((Shape)node).removeEventHandler(eventType, eventHandler);
+        node.removeEventHandler(eventType, eventHandler);
     }
 
     public Bounds getBoundsInLocal() {
-        return ((Shape)node).getBoundsInLocal();
+        return node.getBoundsInLocal();
     }
 
     public Selection select(){

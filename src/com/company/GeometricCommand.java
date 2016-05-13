@@ -1,12 +1,17 @@
 package com.company;
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.transform.Transform;
+
+import java.util.List;
 
 /**
  * Created by ADMIN on 5/10/2016.
  */
 public abstract class GeometricCommand implements Command {
     private MouseEvent event;
+    protected List<Transform> transforms;
+    protected int startTransformIndex;
     private Selection selection;
 
     public GeometricCommand(){}
@@ -29,5 +34,16 @@ public abstract class GeometricCommand implements Command {
 
     public Selection getSelection() {
         return selection;
+    }
+
+    @Override
+    public void undo() {
+        transforms = selection.getTransforms().subList(startTransformIndex,selection.getTransforms().size());
+        selection.removeTransformsFrom(startTransformIndex);
+    }
+
+    @Override
+    public void redo() {
+        selection.getTransforms().addAll(transforms);
     }
 }

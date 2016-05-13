@@ -20,4 +20,7 @@ public class PasteCommand implements Command {
     public void undo() {
         selection.delete();
     }
+
+    @Override
+    public void redo() {selection.add();}
 }

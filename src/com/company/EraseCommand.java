@@ -4,6 +4,8 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 
+import java.util.List;
+
 /**
  * Created by ADMIN on 5/8/2016.
  */
@@ -11,6 +13,7 @@ public class EraseCommand implements Command{
     private int startEnd[];
     private  EraserFactory eraserFactory;
     private EventHandler<MouseEvent> dragErase;
+    private List<BridgeShape> erased;
 
     public EraseCommand(EraserFactory eraserFactory)
     {
@@ -18,10 +21,10 @@ public class EraseCommand implements Command{
         this.eraserFactory = eraserFactory;
         dragErase = event ->
         {
-            Shape eraser = eraserFactory.makeEraser();
+            BridgeShape eraser = eraserFactory.makeEraser();
             eraser.setTranslateX(event.getX());
             eraser.setTranslateY(event.getY());
-            DrawingCanvas.getInstance().getCanvas().getChildren().add(eraser);
+            DrawingCanvas.getInstance().getCanvas().addChild(eraser);
         };
     }
 
@@ -29,19 +32,24 @@ public class EraseCommand implements Command{
     @Override
     public void execute() {
 
-        DrawingCanvas root = DrawingCanvas.getInstance();
-        root.getCanvas() .setOnMousePressed(e->{
-            root.getCanvas().addEventHandler(MouseEvent.MOUSE_DRAGGED,dragErase);
-           startEnd[0]=root.getCanvas().getChildren().size()-1;
+        BridgePane canvas = DrawingCanvas.getInstance().getCanvas();
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED,e->{
+            canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED,dragErase);
+           startEnd[0]=canvas.getChildren().size()-1;
         });
-        root.getCanvas().setOnMouseReleased(e->{
-            root.getCanvas().removeEventHandler(MouseEvent.MOUSE_DRAGGED,dragErase);
-            startEnd[1]=root.getCanvas().getChildren().size();
+        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED,e->{
+            canvas.removeEventHandler(MouseEvent.MOUSE_DRAGGED,dragErase);
+            startEnd[1] = canvas.getChildren().size();
         });
     }
 
     @Override
     public void undo() {
+        DrawingCanvas.getInstance().getCanvas().removeChild();
+    }
+
+    @Override
+    public void redo() {
 
     }
 }

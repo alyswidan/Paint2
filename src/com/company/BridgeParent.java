@@ -21,7 +21,9 @@ public abstract class BridgeParent extends BridgeNode
 
     public abstract void removeChild(BridgeNode node);
 
-    public abstract void addAll(Collection<BridgeNode> shapes);
+    public abstract void addAll(Collection<BridgeNode> nodes);
+
+    public abstract void removeAll(Collection<BridgeNode> nodes);
 
     public List<BridgeNode> getChildren(){return children;}
 

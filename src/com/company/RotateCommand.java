@@ -9,12 +9,10 @@ import javafx.scene.transform.Rotate;
 /**
  * Created by ADMIN on 4/25/2016.
  */
-public class RotateCommand implements Command {
+public class RotateCommand extends GeometricCommand {
     private Selection selection;
     private MouseEvent event;
     private EventHandler<MouseEvent> drag;
-    int startTransformIndex;
-
 
     public RotateCommand(Selection selection,MouseEvent event) {
         this.event = event;
@@ -28,15 +26,12 @@ public class RotateCommand implements Command {
             selection.addTransform(new Rotate(Math.atan2(delta.getY(),delta.getX())));
         };
         startTransformIndex= selection.getTransforms().size();
-        if(new Point2D(((MouseEvent)event).getX(),((MouseEvent)event).getY()).equals(selection.getRotationHandlePos()))
+        if(new Point2D((event).getX(),(event).getY()).equals(selection.getRotationHandlePos()))
             selection.addOnDrag(drag);
         selection.addOnRelease(e -> selection.removeOnDrag(drag));
 
     }
-    @Override
-    public void undo() {
-        selection.removeTransformsFrom(startTransformIndex);
-    }
+
 
 
 }

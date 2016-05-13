@@ -58,9 +58,6 @@ public class DrawingCanvas {
         });
     }
 
-    public void addChild(BridgeNode node){
-        canvas.getChildren().add(node);
-    }
 
     public List<BridgeNode> getChildren(){return canvas.getChildren();}
 

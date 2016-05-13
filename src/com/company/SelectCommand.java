@@ -50,4 +50,6 @@ public class SelectCommand implements Command {
         selection.cancel();
     }
 
+    @Override
+    public void redo() {selection.add();}
 }

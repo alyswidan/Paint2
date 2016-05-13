@@ -21,7 +21,7 @@ public class DrawCommand implements Command {
     @Override
     public void execute() {
         (clickFactory.makeHandler(shape)).handle(event);
-        (new DrawingReleaseFactory().makeHandler(shape,clickFactory)).handle(event);
+        (new DrawingReleaseFactory().makeHandler(clickFactory)).handle(event);
     }
 
     @Override

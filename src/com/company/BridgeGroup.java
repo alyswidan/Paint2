@@ -27,4 +27,8 @@ public class BridgeGroup extends BridgeParent {
         ((Group)node).getChildren().add(child.node);
     }
 
+    @Override
+    public void removeAll(Collection<BridgeNode> nodes) {
+        nodes.forEach(child -> getChildren().remove(child));
+    }
 }
