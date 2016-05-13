@@ -5,6 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by ADMIN on 5/8/2016.
@@ -13,7 +14,7 @@ public class EraseCommand implements Command{
     private int startEnd[];
     private  EraserFactory eraserFactory;
     private EventHandler<MouseEvent> dragErase;
-    private List<BridgeShape> erased;
+    private List<BridgeNode> erased;
 
     public EraseCommand(EraserFactory eraserFactory)
     {
@@ -45,11 +46,12 @@ public class EraseCommand implements Command{
 
     @Override
     public void undo() {
-        DrawingCanvas.getInstance().getCanvas().removeChild();
+        erased = DrawingCanvas.getInstance().getCanvas().getChildren().subList(startEnd[0],startEnd[1]);
+        DrawingCanvas.getInstance().getCanvas().removeAll(erased);
     }
 
     @Override
     public void redo() {
-
+        DrawingCanvas.getInstance().getCanvas().addAll(erased);
     }
 }

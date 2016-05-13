@@ -16,20 +16,30 @@ public class BridgePane extends BridgeParent {
     public void addChild(BridgeNode child)
     {
         ((Pane)node).getChildren().add(child.node);
+        getChildren().add(child);
     }
 
     @Override
     public void addAll(Collection<BridgeNode> children) {
-        children.forEach(child -> ((Pane) node).getChildren().add(child.node));
+        children.forEach(child ->
+        {
+            ((Pane) node).getChildren().add(child.node);
+            getChildren().add(child);
+        });
+    }
+
+    @Override
+    public void removeChild(BridgeNode child) {
+        ((Pane)node).getChildren().remove(child.node);
+        getChildren().remove(child);
     }
 
     @Override
     public void removeAll(Collection<BridgeNode> nodes) {
-        nodes.forEach(child -> ((Pane) node).getChildren().remove(child.node));
-    }
-    @Override
-    public void removeChild(BridgeNode child) {
-        ((Pane)node).getChildren().add(child.node);
+        nodes.forEach(child ->  {
+            ((Pane)node).getChildren().remove(child.node);
+            getChildren().add(child);
+        });
     }
 
 

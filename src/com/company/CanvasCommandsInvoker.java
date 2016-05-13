@@ -33,7 +33,7 @@ public class CanvasCommandsInvoker implements Invoker, Observable {
     }
 
     public void execute(MouseEvent event) {
-        Command command = null;
+        Command command = new NullCommand();
         if (currentType.equals(CanvasCommandsTypes.DRAW))
             command = new DrawCommand(getShape(), event);
         else if (currentType.equals(CanvasCommandsTypes.ERASE))
@@ -58,11 +58,11 @@ public class CanvasCommandsInvoker implements Invoker, Observable {
         manager.setFill(fill);
     }
 
-    public void setShape(String shape) {
+    public void setShape(ShapeTypes shape) {
         manager.setShape(shape);
     }
 
-    public Shape makeEraser() {
+    public BridgeShape makeEraser() {
         return manager.makeEraser();
     }
 
@@ -74,7 +74,7 @@ public class CanvasCommandsInvoker implements Invoker, Observable {
         return manager.getEraserFactory();
     }
 
-    public String getShape() {
+    public ShapeTypes getShape() {
         return manager.getShape();
     }
 

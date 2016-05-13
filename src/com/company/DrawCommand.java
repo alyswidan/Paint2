@@ -22,10 +22,17 @@ public class DrawCommand implements Command {
     public void execute() {
         (clickFactory.makeHandler(shape)).handle(event);
         (new DrawingReleaseFactory().makeHandler(clickFactory)).handle(event);
+        clickFactory.getShape().select();
     }
 
     @Override
     public void undo() {
         DrawingCanvas.getInstance().getCanvas().getChildren().remove(clickFactory.getShape());
     }
+
+    @Override
+    public void redo() {
+        DrawingCanvas.getInstance().getCanvas().getChildren().add(clickFactory.getShape());
+    }
+
 }

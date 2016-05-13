@@ -9,7 +9,7 @@ import javafx.scene.shape.Shape;
 public class CanvasCommandsManager {
     private EraserFactory eraserFactory;
     private Paint fill;
-    private String shape;
+    private ShapeTypes shape;
     private Stroke stroke;
 
 
@@ -21,7 +21,7 @@ public class CanvasCommandsManager {
         this.fill = fill;
     }
 
-    public void setShape(String shape) {
+    public void setShape(ShapeTypes shape) {
         this.shape = shape;
     }
 
@@ -33,11 +33,11 @@ public class CanvasCommandsManager {
         return fill;
     }
 
-    public String getShape() {
+    public ShapeTypes getShape() {
         return shape;
     }
 
-    public Shape makeEraser() {
+    public BridgeShape makeEraser() {
         return eraserFactory.makeEraser();
     }
 

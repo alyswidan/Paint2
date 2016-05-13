@@ -15,20 +15,30 @@ public class BridgeGroup extends BridgeParent {
     public void addChild(BridgeNode child)
     {
         ((Group)node).getChildren().add(child.node);
+        getChildren().add(child);
     }
 
     @Override
     public void addAll(Collection<BridgeNode> children) {
-        children.forEach(child -> ((Group) node).getChildren().add(child.node));
+        children.forEach(child ->
+        {
+            ((Group) node).getChildren().add(child.node);
+            getChildren().add(child);
+        });
     }
 
     @Override
     public void removeChild(BridgeNode child) {
-        ((Group)node).getChildren().add(child.node);
+        ((Group)node).getChildren().remove(child.node);
+        getChildren().remove(child);
     }
 
     @Override
     public void removeAll(Collection<BridgeNode> nodes) {
-        nodes.forEach(child -> getChildren().remove(child));
+        nodes.forEach(child ->
+        {
+            ((Group)node).getChildren().remove(child.node);
+            getChildren().remove(child);
+        });
     }
 }

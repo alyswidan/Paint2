@@ -11,20 +11,27 @@ public class FillCommand implements Command {
     private Paint previousFill;
     private Paint fill;
     private MouseEvent mouseEvent;
+    private BridgeShape shape;
 
     public FillCommand(Paint fill, MouseEvent mouseEvent) {
         this.fill = fill;
         this.mouseEvent = mouseEvent;
+        shape = ShapeTypes.valueOf((mouseEvent.getTarget().getClass().getSimpleName().toUpperCase())).makeShape();
     }
 
     @Override
     public void execute() {
-        previousFill = ((Shape)this.mouseEvent.getTarget()).getFill();
-        ((Shape)this.mouseEvent.getTarget()).setFill(fill);
+        previousFill = shape.getFill();
+        shape.fill(fill);
     }
 
     @Override
     public void undo() {
-        ((Shape)this.mouseEvent.getTarget()).setFill(previousFill);
+        shape.fill(previousFill);
+    }
+
+    @Override
+    public void redo() {
+        shape.fill(fill);
     }
 }
