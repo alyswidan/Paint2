@@ -9,10 +9,35 @@ import javafx.scene.shape.Shape;
  */
 public class BridgeEllipse extends BridgeShape {
 
-    public BridgeEllipse(double raduisX, double raduisY) {
-        shape = new Ellipse();
-        ((Ellipse) shape).setRadiusX(raduisX);
-        ((Ellipse) shape).setRadiusY(raduisY);
+    public BridgeEllipse(double radiusX, double radiusY) {
+        node = new Ellipse();
+        ((Ellipse) node).setRadiusX(radiusX);
+        ((Ellipse) node).setRadiusY(radiusY);
+    }
+
+    @Override
+    public void setStartX(double x) {
+
+    }
+
+    @Override
+    public void setStartY(double y) {
+
+    }
+
+    @Override
+    public double getStartX() {
+        return 0;
+    }
+
+    @Override
+    public double getStartY() {
+        return 0;
+    }
+
+    @Override
+    public void expandToPosition(double x, double y) {
+
     }
 
     @Override

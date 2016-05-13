@@ -66,7 +66,7 @@ public class Selection {
     }
 
     public void addRect() {
-        DrawingCanvas.getInstance().addShape(selectionGroupBuilder.getSelectionRect());
+        DrawingCanvas.getInstance().addChild(selectionGroupBuilder.getSelectionRect());
     }
 
     public void expandRectToPos(double x, double y) {
@@ -74,29 +74,26 @@ public class Selection {
     }
 
     public void getSelection() {
-        Predicate<BridgeShape> boundsCheck = shape -> selectionGroupBuilder.
-                getSelectionRect().
-                getBoundsInLocal().
+        Predicate<BridgeNode> boundsCheck = shape -> selectionGroupBuilder.
+                getSelectionRect().getBoundsInLocal().
                 contains(shape.getBoundsInLocal());
-        Predicate<BridgeShape> selectionRectEquality = selectionGroupBuilder.getSelectionRect()::equals;
+        Predicate<BridgeNode> selectionRectEquality = selectionGroupBuilder.getSelectionRect()::equals;
 
         selectionGroup
                 .addAll(DrawingCanvas.getInstance()
                         .getCanvas()
                         .getChildren()
                         .stream()
-                        .filter(
-                                boundsCheck.
-                                        or(node -> node.
-                                                intersects(selectionGroupBuilder.getSelectionRect().getBoundsInLocal()))
-                                        .and(selectionRectEquality)
-                                        .negate())
+                        .filter(boundsCheck.
+                                or(shape -> shape.intersects(selectionGroupBuilder.getSelectionRect().getBoundsInLocal()))
+                                .and(selectionRectEquality)
+                                .negate())
                         .collect(Collectors.toList()));
     }
 
     public void submitSelection() {
 
-        DrawingCanvas.getInstance().getCanvas().getChildren().add(selectionGroup);
+        DrawingCanvas.getInstance().getCanvas().addChild(selectionGroup);
         selectionGroup.getChildren().add(selectionGroupBuilder.submitRectangle().buildSelectionHandleGroup());
         SelectionManager.getInstance().add(this);
         addOnClick(SelectionCommandsInvoker.getInstance()::execute);
@@ -110,11 +107,7 @@ public class Selection {
     }
 
     public Selection copy() {
-        return Selection.fromCopyableShapes(selectionGroup
-                .getChildren()
-                .stream()
-                .map(node -> new CopyableShape((Shape) node))
-                .collect(Collectors.toList()));
+        return Selection.fromShapes(selectionGroup.getChildren().stream().map(node -> (BridgeShape)node).collect(Collectors.toList()));
 
     }
 
@@ -137,7 +130,7 @@ public class Selection {
         DrawingCanvas.getInstance().getCanvas().getChildren().remove(selectionGroup);
     }
 
-    public List<Node> getShapes() {
+    public List<BridgeNode> getShapes() {
         return selectionGroup.getChildren();
     }
 

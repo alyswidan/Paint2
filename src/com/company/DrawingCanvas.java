@@ -3,10 +3,7 @@ package com.company;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.MouseButton;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -20,7 +17,7 @@ import java.util.List;
  */
 public class DrawingCanvas {
     private static DrawingCanvas ourInstance;
-    private Pane canvas;
+    private BridgePane canvas;
 
 
     public static DrawingCanvas getInstance() {
@@ -28,7 +25,7 @@ public class DrawingCanvas {
         return ourInstance;
     }
 
-    public Pane getCanvas() {
+    public BridgePane getCanvas() {
         return canvas;
     }
 
@@ -47,28 +44,28 @@ public class DrawingCanvas {
         ContextMenu menu = makeContextMenu();
         boolean isOpen[] = new boolean[1];
 
-        canvas.setOnMousePressed(event -> {
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
 
             if (event.getButton().equals(MouseButton.SECONDARY)) {
                 if (event.getTarget() instanceof Shape)
                     EditCommandsInvoker.getInstance().setSelection(Selection.fromShape((Shape) event.getTarget()));
                 isOpen[0] = true;
-                menu.show(canvas, event.getScreenX(), event.getScreenY());
+                menu.show(canvas.node, event.getScreenX(), event.getScreenY());
             } else {
                 if (isOpen[0]) menu.hide();
             }
         });
     }
 
-    public void addShape(BridgeShape shape){
-        canvas.getChildren().add(shape.shape);
+    public void addChild(BridgeNode node){
+        canvas.getChildren().add(node);
     }
 
-    public List<BridgeShape> getShapes(){return canvas.getChildren().stream().map(node -> );}
+    public List<BridgeNode> getChildren(){return canvas.getChildren();}
 
     private DrawingCanvas() {
-        canvas = new Pane();
+        canvas = new BridgePane();
         init();
     }
 }

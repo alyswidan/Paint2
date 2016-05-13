@@ -10,19 +10,21 @@ import java.util.Collection;
  * Created by ADMIN on 5/12/2016.
  */
 public class BridgeGroup extends BridgeParent {
+
     @Override
-    public void addShape(BridgeShape shape) {
-        ((Group)parent).getChildren().add(shape.shape);
+    public void addChild(BridgeNode child)
+    {
+        ((Group)node).getChildren().add(child.node);
     }
 
     @Override
-    public void removeShape(BridgeShape shape) {
-        ((Group)parent).getChildren().add(shape.shape);
+    public void addAll(Collection<BridgeNode> children) {
+        children.forEach(child -> ((Group) node).getChildren().add(child.node));
     }
 
     @Override
-    public void addAll(Collection<BridgeShape> shapes) {
-        shapes.forEach(shape -> ((Pane) parent).getChildren().add(shape.shape));
+    public void removeChild(BridgeNode child) {
+        ((Group)node).getChildren().add(child.node);
     }
 
 }

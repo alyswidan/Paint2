@@ -20,9 +20,6 @@ public class DrawingClickFactory {
             shape = new Circle();
             shape.setStyle(style);
             drag = e -> {
-                double dx = e.getX() - pivot.getAnchorX();
-                double dy = e.getY() - pivot.getAnchorY();
-                ((Circle) shape).setRadius(Math.sqrt(dx * dx + dy * dy));
             };
             click = event ->
             {

@@ -9,7 +9,6 @@ import javafx.scene.shape.Polygon;
  */
 public class BridgeIsoscelesTriangle extends BridgePolygon {
 
-    private double vertX,vertY,base1X,base1Y,base2X,base2Y;//base1 on the left, base2 on the right
 
     public BridgeIsoscelesTriangle() {
         super();
@@ -18,23 +17,21 @@ public class BridgeIsoscelesTriangle extends BridgePolygon {
     public void expandToPosition(double x, double y){
         setBase2X(x);
         setBase2Y(y);
-        setBase1X(2*getVertX()-getBase2X());
+        setBase1X(2*getStartX()-getBase2X());
         setBase1Y(base2Y);
     }
 
-    public double getVertX() {
+    public double getStartX() {
         return ((Polygon)shape).getPoints().get(0);
     }
 
-    public void setVertX(double vertX) {
-        ((Polygon)shape )
-    }
+    public void setStartX(double vertX) {((Polygon)shape)}
 
-    public double getVertY() {
+    public double getStartY() {
         return vertY;
     }
 
-    public void setVertY(double vertY) {
+    public void setStartY(double vertY) {
         this.vertY = vertY;
     }
 

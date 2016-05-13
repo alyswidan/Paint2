@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.BridgeShape;
+import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 import sun.corba.Bridge;
 
@@ -11,8 +12,8 @@ public class BridgrCircle extends BridgeShape {
 
 
     public BridgrCircle(double radius) {
-        shape = new Circle();
-        ((Circle) shape).setRadius(radius);
+        node = new Circle();
+        ((Circle) node).setRadius(radius);
     }
 
     public BridgrCircle(double centreX,double centreY,double radius) {
@@ -26,24 +27,53 @@ public class BridgrCircle extends BridgeShape {
         this(centreX,centreY,0);
     }
 
+
     public void setCenterX(double value) {
-        ((Circle)shape).setCenterX(value);
+        ((Circle)node).setCenterX(value);
     }
 
     public void setCenterY(double value) {
-        ((Circle)shape).setCenterY(value);
+        ((Circle)node).setCenterY(value);
     }
 
     public double getCenterX() {
-        return ((Circle)shape).getCenterX();
+        return ((Circle)node).getCenterX();
     }
 
+    public void setRadius(double radius) {
+         ((Circle)node).setRadius(radius);
+    }
     public double getRadius() {
-        return ((Circle)shape).getRadius();
+        return ((Circle)node).getRadius();
     }
 
     public double getCenterY() {
-        return ((Circle)shape).getCenterY();
+        return ((Circle)node).getCenterY();
+    }
+
+    @Override
+    public void setStartX(double x) {
+        setCenterX(x);
+    }
+
+    @Override
+    public void setStartY(double y) {
+        setCenterY(y);
+    }
+
+    @Override
+    public double getStartX() {
+        return getCenterX();
+    }
+
+    @Override
+    public double getStartY() {
+        return getCenterY();
+    }
+
+    @Override
+    public void expandToPosition(double x, double y) {
+        setRadius(( new Point2D(Math.abs(x-getStartX()),Math.abs(y-getStartY())).magnitude()));
     }
 
     @Override

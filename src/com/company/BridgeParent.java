@@ -7,35 +7,22 @@ import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by ADMIN on 5/12/2016.
  */
-public abstract class BridgeParent
+public abstract class BridgeParent extends BridgeNode
 {
-    Parent parent;
 
-    public void requestFocus() {
-        parent.requestFocus();
-    }
+    List<BridgeNode> children;
 
-    public <T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
-        parent.addEventHandler(eventType, eventHandler);
-    }
+    public abstract void addChild(BridgeNode node);
 
-    public <T extends Event> void removeEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
-        parent.removeEventHandler(eventType, eventHandler);
-    }
+    public abstract void removeChild(BridgeNode node);
 
-    public Bounds getBoundsInLocal() {
-        return parent.getBoundsInLocal();
-    }
+    public abstract void addAll(Collection<BridgeNode> shapes);
 
-
-    public abstract void addShape(BridgeShape shape);
-
-    public abstract void removeShape(BridgeShape shape);
-
-    public abstract void addAll(Collection<BridgeShape> shapes);
+    public List<BridgeNode> getChildren(){return children;}
 
 }

@@ -9,9 +9,13 @@ public class BridgeLine extends BridgeShape{
     Line line = new Line();
 
     public BridgeLine(double startX,double startY,double endX,double endY) {
-        shape = new Line(startX,startY,endX,endY);
+        node = new Line(startX,startY,endX,endY);
     }
-
+    public void expandToPosition(double x,double y)
+    {
+        setEndX(x);
+        setEndY(y);
+    }
     public void setStartX(double value) {
         line.setStartX(value);
     }

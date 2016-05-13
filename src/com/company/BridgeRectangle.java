@@ -13,11 +13,11 @@ import javafx.scene.shape.Rectangle;
  */
 public class BridgeRectangle extends BridgeShape {
 
-    protected DragContext startAnchor;
+
 
     public BridgeRectangle() {
-        shape = new Rectangle();
-        startAnchor = new DragContext();
+        node = new Rectangle();
+
     }
     public BridgeRectangle(double x,double y)
     {
@@ -34,46 +34,53 @@ public class BridgeRectangle extends BridgeShape {
 
 
     public double getWidth() {
-        return ((Rectangle)shape).getWidth();
+        return ((Rectangle)node).getWidth();
     }
 
     public void setWidth(double width) {
-        ((Rectangle)shape).setWidth(width);
+        ((Rectangle)node).setWidth(width);
     }
 
     public double getHeight() {
-        return ((Rectangle)shape).getWidth();
+        return ((Rectangle)node).getWidth();
     }
 
     public void setHeight(double height) {
-        ((Rectangle)shape).setWidth(height);
+        ((Rectangle)node).setWidth(height);
     }
 
     public void setX(double x)
     {
-        ((Rectangle) shape).setX(x);
+        ((Rectangle) node).setX(x);
     }
 
     public void setY(double y)
     {
-        ((Rectangle) shape).setY(y);
+        ((Rectangle) node).setY(y);
     }
 
+    public void setStartX(double x){setAnchorX(x);}
+    public void setStartY(double y){setAnchorY(y);}
+    public double getStartX( ){return getAnchorX();}
+    public double getStartY(){return getAnchorY();}
 
     public double getX()
     {
-        return ((Rectangle) shape).getX();
+        return ((Rectangle) node).getX();
     }
 
     public double getY()
     {
-        return ((Rectangle) shape).getY();
+        return ((Rectangle) node).getY();
     }
+
+
+
     @Override
     public BridgeRectangle copy()
     {
-        BridgeRectangle rectangle = new BridgeRectangle(((Rectangle) shape).getX(),
-                ((Rectangle) shape).getY(),((Rectangle) shape).getWidth(),((Rectangle) shape).getHeight());
+        BridgeRectangle rectangle = new BridgeRectangle(((Rectangle) node).getX(),
+                ((Rectangle) node).getY(),((Rectangle) node).getWidth(),((Rectangle) node).getHeight());
         rectangle.setStrokeDetails(getStrokeDetails());
         rectangle.fill(getFill());
         return rectangle;
