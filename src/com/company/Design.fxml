@@ -7,12 +7,12 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.Controller">
     <children>
         <ToolBar layoutY="25.0" prefHeight="120.0" prefWidth="1360.0" />
         <GridPane layoutX="10.0" layoutY="48.0" prefHeight="90.0" prefWidth="150.0">
             <children>
-                <ToggleButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="32.0" prefWidth="50.0" text="ToggleButton">
+                <ToggleButton fx:id="line" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="32.0" prefWidth="50.0" text="ToggleButton">
                     <graphic>
                         <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -24,7 +24,7 @@
                         <ToggleGroup fx:id="toggleGrp1" />
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="1">
+                <ToggleButton fx:id="rectangle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="1">
                     <graphic>
                         <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -33,7 +33,7 @@
                         </ImageView>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="2">
+                <ToggleButton fx:id="square" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="2">
                     <graphic>
                         <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -143,7 +143,7 @@
         <Line endX="485.0" endY="135.0" opacity="0.35" startX="485.0" startY="35.0" />
         <ToggleButton contentDisplay="GRAPHIC_ONLY" layoutX="500.0" layoutY="48.0" mnemonicParsing="false" text="ToggleButton" toggleGroup="$toggleGrp1">
             <graphic>
-                <ImageView fitHeight="50.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="select" fitHeight="50.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@images/select.png" />
                     </image>
@@ -152,7 +152,7 @@
         </ToggleButton>
         <ToggleButton contentDisplay="GRAPHIC_ONLY" layoutX="545.0" layoutY="108.5" mnemonicParsing="false" text="ToggleButton" toggleGroup="$toggleGrp1">
             <graphic>
-                <ImageView fitHeight="25.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" x="500.0" y="90.0">
+                <ImageView fx:id="eraser" fitHeight="25.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" x="500.0" y="90.0">
                     <image>
                         <Image url="@images/eraser.png" />
                     </image>
@@ -160,7 +160,7 @@
             </graphic></ToggleButton>
         <ToggleButton contentDisplay="GRAPHIC_ONLY" layoutX="500.0" layoutY="108.5" mnemonicParsing="false" text="ToggleButton" toggleGroup="$toggleGrp1">
             <graphic>
-                <ImageView fitHeight="25.0" fitWidth="60.0" layoutX="500.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="fill" fitHeight="25.0" fitWidth="60.0" layoutX="500.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@images/fill.png" />
                     </image>
