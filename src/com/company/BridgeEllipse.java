@@ -9,41 +9,77 @@ import javafx.scene.shape.Shape;
  */
 public class BridgeEllipse extends BridgeShape {
 
-    public BridgeEllipse(double radiusX, double radiusY) {
-        node = new Ellipse();
-        ((Ellipse) node).setRadiusX(radiusX);
-        ((Ellipse) node).setRadiusY(radiusY);
+    private BridgeRectangle boundingRect = new BridgeRectangle();
+    public BridgeEllipse(){node = new Ellipse();}
+    public BridgeEllipse(double radiusX, double radiusY) {node = new Ellipse(radiusX,radiusY);}
+    public BridgeEllipse(double centreX,double centreY,double radiusX, double radiusY) 
+    {node = new Ellipse(centreX,centreY,radiusX,radiusY);}
+
+    public void setRadiusY(double value) {
+        ((Ellipse)node).setRadiusY(value);
+    }
+
+    public double getRadiusY() {
+        return ((Ellipse)node).getRadiusY();
+    }
+
+    public double getRadiusX() {
+        return ((Ellipse)node).getRadiusX();
+    }
+
+    public double getCenterY() {
+        return ((Ellipse)node).getCenterY();
+    }
+
+    public double getCenterX() {
+        return ((Ellipse)node).getCenterX();
+    }
+
+    public void setCenterX(double value) {
+        ((Ellipse)node).setCenterX(value);
+    }
+
+    public void setCenterY(double value) {
+        ((Ellipse)node).setCenterY(value);
+    }
+
+    public void setRadiusX(double value) {
+        ((Ellipse)node).setRadiusX(value);
     }
 
     @Override
     public void setStartX(double x) {
-
+        boundingRect.setAnchorX(x);
     }
 
     @Override
     public void setStartY(double y) {
-
+        boundingRect.setAnchorY(y);
     }
-
-
-
+    
     @Override
     public double getStartX() {
-        return 0;
+        return boundingRect.getAnchorX();
     }
 
     @Override
-    public double getStartY() {
-        return 0;
-    }
+    public double getStartY() {return boundingRect.getAnchorY();}
 
     @Override
     public void expandToPosition(double x, double y) {
 
+        boundingRect.expandToPosition(x,y);
+        setCenterX(boundingRect.getCentreX());
+        setCenterY(boundingRect.getCentreY());
+        setRadiusX(boundingRect.getWidth()/2);
+        setRadiusY(boundingRect.getHeight()/2);
     }
 
     @Override
     public BridgeShape copy() {
-        return null;
+        BridgeEllipse ellipse = new BridgeEllipse(getCenterX(),getCenterY(),getRadiusX(),getRadiusY());
+        ellipse.fill(getFill());
+        ellipse.setStrokeDetails(getStrokeDetails());
+        return ellipse;
     }
 }

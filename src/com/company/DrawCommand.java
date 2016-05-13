@@ -8,10 +8,10 @@ import javafx.scene.input.MouseEvent;
  */
 public class DrawCommand implements Command {
     private MouseEvent event;
-    private String shape;
+    private ShapeTypes shape;
     private DrawingClickFactory clickFactory;
 
-    public DrawCommand(String shape,MouseEvent event) {
+    public DrawCommand(ShapeTypes shape,MouseEvent event) {
         this.shape = shape;
         this.event = event;
         clickFactory = new DrawingClickFactory();

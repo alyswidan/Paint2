@@ -15,7 +15,7 @@ public abstract class BridgeShape extends BridgeNode {
 
 
     private Stroke stroke;
-    protected DragContext startAnchor = new DragContext();
+
     public void fill(Paint color) {
         ((Shape)node).setFill(color);
     }
@@ -48,10 +48,14 @@ public abstract class BridgeShape extends BridgeNode {
 
     public abstract void setStartX(double x);
     public abstract void setStartY(double y);
+
     public abstract double getStartX();
     public abstract double getStartY();
     public abstract void expandToPosition(double x,double y);
-
+    public  void setStart(double x,double y){
+        setStartX(x);
+        setStartY(y);
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -63,24 +67,6 @@ public abstract class BridgeShape extends BridgeNode {
         return node != null ? node.equals(that.node) : that.node == null;
 
     }
-
-    public double getAnchorX() {
-        return startAnchor.getAnchorX();
-    }
-
-    public double getAnchorY() {
-        return startAnchor.getAnchorY();
-    }
-
-    public void setAnchorY(double anchorY) {
-        startAnchor.setAnchorY(anchorY);
-    }
-
-    public void setAnchorX(double anchorX) {
-        startAnchor.setAnchorX(anchorX);
-    }
-
-
 
     @Override
     public int hashCode() {

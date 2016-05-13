@@ -8,6 +8,7 @@ import javafx.scene.shape.Line;
 public class BridgeLine extends BridgeShape{
     Line line = new Line();
 
+    public BridgeLine(){};
     public BridgeLine(double startX,double startY,double endX,double endY) {
         node = new Line(startX,startY,endX,endY);
     }
@@ -27,6 +28,8 @@ public class BridgeLine extends BridgeShape{
     public void setStartY(double value) {
         line.setStartY(value);
     }
+
+
 
     public double getStartY() {
         return line.getStartY();

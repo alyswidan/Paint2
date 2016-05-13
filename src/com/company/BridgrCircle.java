@@ -3,12 +3,14 @@ package com.company;
 import com.company.BridgeShape;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import sun.corba.Bridge;
 
 /**
  * Created by user on 5/12/2016.
  */
 public class BridgrCircle extends BridgeShape {
+
 
 
     public BridgrCircle(double radius) {
@@ -25,6 +27,10 @@ public class BridgrCircle extends BridgeShape {
     public BridgrCircle(double centreX,double centreY)
     {
         this(centreX,centreY,0);
+    }
+
+    public BridgrCircle() {
+
     }
 
 
@@ -78,6 +84,9 @@ public class BridgrCircle extends BridgeShape {
 
     @Override
     public BridgeShape copy() {
-        return null;
+        BridgrCircle circle = new BridgrCircle(getCenterX(),getCenterY(),getRadius());
+        circle.setStrokeDetails(getStrokeDetails());
+        circle.fill(getFill());
+        return circle;
     }
 }

@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
  */
 public class BridgeRectangle extends BridgeShape {
 
-
+    private DragContext startAnchor = new DragContext();
 
     public BridgeRectangle() {
         node = new Rectangle();
@@ -74,6 +74,27 @@ public class BridgeRectangle extends BridgeShape {
         return ((Rectangle) node).getY();
     }
 
+    public double getCentreX(){return getX()+getWidth()/2;}
+    public double getCentreY(){return getY()+getHeight()/2;}
+
+    public double getAnchorX() {
+        return startAnchor.getAnchorX();
+    }
+
+    public double getAnchorY() {
+        return startAnchor.getAnchorY();
+    }
+
+    public void setAnchorY(double anchorY) {
+        startAnchor.setAnchorY(anchorY);
+    }
+
+    public void setAnchorX(double anchorX) {
+        startAnchor.setAnchorX(anchorX);
+    }
+
+
+
 
 
     @Override
@@ -85,7 +106,7 @@ public class BridgeRectangle extends BridgeShape {
         rectangle.fill(getFill());
         return rectangle;
     }
-    public void expendToPosition(double x,double y)
+    public void expandToPosition(double x,double y)
     {
         double dx = Math.abs(startAnchor.getAnchorX()-x);
         double dy = Math.abs(startAnchor.getAnchorY()-y);
