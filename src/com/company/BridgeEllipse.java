@@ -25,6 +25,8 @@ public class BridgeEllipse extends BridgeShape {
 
     }
 
+
+
     @Override
     public double getStartX() {
         return 0;
