@@ -14,14 +14,14 @@ public class ResizeFactory {
     private Point2D start, pivot;
     private Selection selection;
 
-    private void setParameters(Point2D start,Point2D pivot) {
-        this.start = start;
-        this.pivot = pivot;
-    }
-
     public ResizeFactory(Point2D anchor, Selection selection) {
         this.selection = selection;
-        setParameters(anchor,selection.getOpposite(anchor));
+        setParameters(anchor, selection.getOpposite(anchor));
+    }
+
+    private void setParameters(Point2D start, Point2D pivot) {
+        this.start = start;
+        this.pivot = pivot;
     }
 
     private Transform getScaleToPosition(double x, double y) {
@@ -48,6 +48,8 @@ public class ResizeFactory {
         return start.getX();
     }
 
-    public double getStartY() {return start.getY();}
+    public double getStartY() {
+        return start.getY();
+    }
 
 }

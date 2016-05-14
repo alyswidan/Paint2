@@ -9,22 +9,16 @@ import java.util.List;
  * Created by ADMIN on 5/10/2016.
  */
 public abstract class GeometricCommand implements Command {
-    private MouseEvent event;
     protected List<Transform> transforms;
     protected int startTransformIndex;
+    private MouseEvent event;
     private Selection selection;
 
-    public GeometricCommand(){}
+    public GeometricCommand() {
+    }
+
     public GeometricCommand(MouseEvent event, Selection selection) {
         this.event = event;
-        this.selection = selection;
-    }
-
-    public void setEvent(MouseEvent event) {
-        this.event = event;
-    }
-
-    public void setSelection(Selection selection) {
         this.selection = selection;
     }
 
@@ -32,13 +26,21 @@ public abstract class GeometricCommand implements Command {
         return event;
     }
 
+    public void setEvent(MouseEvent event) {
+        this.event = event;
+    }
+
     public Selection getSelection() {
         return selection;
     }
 
+    public void setSelection(Selection selection) {
+        this.selection = selection;
+    }
+
     @Override
     public void undo() {
-        transforms = selection.getTransforms().subList(startTransformIndex,selection.getTransforms().size());
+        transforms = selection.getTransforms().subList(startTransformIndex, selection.getTransforms().size());
         selection.removeTransformsFrom(startTransformIndex);
     }
 

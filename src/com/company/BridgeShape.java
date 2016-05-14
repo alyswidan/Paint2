@@ -4,7 +4,6 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.geometry.Bounds;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 
@@ -13,16 +12,14 @@ import javafx.scene.shape.Shape;
  */
 public abstract class BridgeShape extends BridgeNode {
 
-
     private Stroke stroke;
 
     public void fill(Paint color) {
-        ((Shape)node).setFill(color);
+        ((Shape) node).setFill(color);
     }
 
-    public Paint getFill(){return ((Shape)node).getFill();}
-    public void setStrokeDetails(Stroke stroke) {
-        node.setStyle("-fx-stroke:"+stroke.getColor()+";-fx-stroke-width:"+stroke.getStrokeWidth()+"px;");
+    public Paint getFill() {
+        return ((Shape) node).getFill();
     }
 
     public void setTranslateY(double value) {
@@ -33,8 +30,12 @@ public abstract class BridgeShape extends BridgeNode {
         node.setTranslateX(value);
     }
 
-    public Stroke getStrokeDetails(){
+    public Stroke getStrokeDetails() {
         return stroke;
+    }
+
+    public void setStrokeDetails(Stroke stroke) {
+        node.setStyle("-fx-stroke:" + stroke.getColor() + ";-fx-stroke-width:" + stroke.getStrokeWidth() + "px;");
     }
 
     public <T extends Event> void addEventHandler(EventType<T> eventType, EventHandler<? super T> eventHandler) {
@@ -49,17 +50,21 @@ public abstract class BridgeShape extends BridgeNode {
         return node.getBoundsInLocal();
     }
 
-    public Selection select(){
-        return Selection.fromShape(((Shape)node));
+    public Selection select() {
+        return Selection.fromShape(((Shape) node));
     }
 
+    public abstract double getStartX();
+
     public abstract void setStartX(double x);
+
+    public abstract double getStartY();
+
     public abstract void setStartY(double y);
 
-    public abstract double getStartX();
-    public abstract double getStartY();
-    public abstract void expandToPosition(double x,double y);
-    public  void setStart(double x,double y){
+    public abstract void expandToPosition(double x, double y);
+
+    public void setStart(double x, double y) {
         setStartX(x);
         setStartY(y);
     }

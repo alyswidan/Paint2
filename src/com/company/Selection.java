@@ -3,35 +3,24 @@ package com.company;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
+import javafx.scene.shape.Shape;
 import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.scene.transform.Transform;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
-import javax.net.ssl.SSLEngine;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by ADMIN on 4/24/2016.
  */
 
 public class Selection {
+    private final double padding = 5;//padding of rectangle
     private BridgeGroup selectionGroup;
     private SelectionGroupBuilder selectionGroupBuilder;
     private DragContext startAnchor;
-    private final double padding = 5;//padding of rectangle
 
     private Selection(double x, double y) {
         selectionGroupBuilder = new SelectionGroupBuilder(this);
@@ -70,7 +59,7 @@ public class Selection {
     }
 
     public void expandRectToPos(double x, double y) {
-        selectionGroupBuilder.getSelectionRect().expandToPosition(x,y);
+        selectionGroupBuilder.getSelectionRect().expandToPosition(x, y);
     }
 
     public void getSelection() {
@@ -107,7 +96,7 @@ public class Selection {
     }
 
     public Selection copy() {
-        return Selection.fromShapes(selectionGroup.getChildren().stream().map(node -> (BridgeShape)node).collect(Collectors.toList()));
+        return Selection.fromShapes(selectionGroup.getChildren().stream().map(node -> (BridgeShape) node).collect(Collectors.toList()));
 
     }
 

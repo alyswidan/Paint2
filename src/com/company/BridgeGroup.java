@@ -1,8 +1,6 @@
 package com.company;
 
 import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
 
 import java.util.Collection;
 
@@ -16,9 +14,8 @@ public class BridgeGroup extends BridgeParent {
     }
 
     @Override
-    public void addChild(BridgeNode child)
-    {
-        ((Group)node).getChildren().add(child.node);
+    public void addChild(BridgeNode child) {
+        ((Group) node).getChildren().add(child.node);
         getChildren().add(child);
     }
 
@@ -33,7 +30,7 @@ public class BridgeGroup extends BridgeParent {
 
     @Override
     public void removeChild(BridgeNode child) {
-        ((Group)node).getChildren().remove(child.node);
+        ((Group) node).getChildren().remove(child.node);
         getChildren().remove(child);
     }
 
@@ -41,7 +38,7 @@ public class BridgeGroup extends BridgeParent {
     public void removeAll(Collection<BridgeNode> nodes) {
         nodes.forEach(child ->
         {
-            ((Group)node).getChildren().remove(child.node);
+            ((Group) node).getChildren().remove(child.node);
             getChildren().remove(child);
         });
     }

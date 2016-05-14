@@ -3,9 +3,7 @@ package com.company;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Shape;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -15,12 +13,12 @@ import java.util.Stack;
  */
 public class CanvasCommandsInvoker implements Invoker, Observable {
 
-    private CanvasCommandsManager manager = new CanvasCommandsManager();
     private static CanvasCommandsInvoker invoker = new CanvasCommandsInvoker();
-    private CanvasCommandsTypes currentType;
-    private List<Observer> observers = new ArrayList<>();
     Stack<Command> undoCommands = new Stack<>();
     Stack<Command> redoCommands = new Stack<>();
+    private CanvasCommandsManager manager = new CanvasCommandsManager();
+    private CanvasCommandsTypes currentType;
+    private List<Observer> observers = new ArrayList<>();
 
     private CanvasCommandsInvoker() {
     }
@@ -31,7 +29,7 @@ public class CanvasCommandsInvoker implements Invoker, Observable {
     }
 
     public void execute(MouseEvent event) {
-        System.out.println("hello");
+        System.out.println(event.getX() + " " + event.getY());
         Command command = new NullCommand();
         System.out.println(currentType == null);
         if (currentType.equals(CanvasCommandsTypes.DRAW))
@@ -50,19 +48,6 @@ public class CanvasCommandsInvoker implements Invoker, Observable {
         this.currentType = currentType;
     }
 
-    public void setEraserFactory(EraserFactory eraserFactory) {
-        manager.setEraserFactory(eraserFactory);
-    }
-
-    public void setFill(Paint fill) {
-        manager.setFill(fill);
-    }
-
-    public void setShape(ShapeTypes shape) {
-        System.out.println(shape);
-        manager.setShape(shape);
-    }
-
     public BridgeShape makeEraser() {
         return manager.makeEraser();
     }
@@ -71,12 +56,25 @@ public class CanvasCommandsInvoker implements Invoker, Observable {
         return manager.getFill();
     }
 
+    public void setFill(Paint fill) {
+        manager.setFill(fill);
+    }
+
     public EraserFactory getEraserFactory() {
         return manager.getEraserFactory();
     }
 
+    public void setEraserFactory(EraserFactory eraserFactory) {
+        manager.setEraserFactory(eraserFactory);
+    }
+
     public ShapeTypes getShape() {
         return manager.getShape();
+    }
+
+    public void setShape(ShapeTypes shape) {
+        System.out.println(shape);
+        manager.setShape(shape);
     }
 
     @Override

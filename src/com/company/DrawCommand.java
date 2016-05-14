@@ -1,6 +1,5 @@
 package com.company;
 
-import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -11,7 +10,7 @@ public class DrawCommand implements Command {
     private ShapeTypes shape;
     private DrawingClickFactory clickFactory;
 
-    public DrawCommand(ShapeTypes shape,MouseEvent event) {
+    public DrawCommand(ShapeTypes shape, MouseEvent event) {
         this.shape = shape;
         this.event = event;
         clickFactory = new DrawingClickFactory();
@@ -20,10 +19,10 @@ public class DrawCommand implements Command {
     @Override
     public void execute() {
         (clickFactory.makeHandler(shape)).handle(event);
-        System.out.println("bola");
-        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED,
-                new DrawingReleaseFactory().makeHandler(clickFactory));
-       // clickFactory.getShape().select();
+
+        DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED, event1 ->
+                new DrawingReleaseFactory().makeHandler(clickFactory).handle(event1));
+        clickFactory.getShape().select();
     }
 
     @Override

@@ -1,29 +1,39 @@
 package com.company;
 
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.*;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * Created by ADMIN on 4/25/2016.
  */
 public class DrawingCanvas {
-    private static DrawingCanvas ourInstance=null;
+    private static DrawingCanvas ourInstance = null;
     private BridgePane canvas;
 
+
+    private DrawingCanvas() {
+        canvas = new BridgePane();
+        canvas.node.setId("canvas");
+        canvas.node.setLayoutX(0);
+        canvas.node.setLayoutY(120);
+        canvas.node.minHeight(600);
+        canvas.node.minWidth(1360);
+        canvas.setStyle("-fx-background-color:white;");
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
+        {
+            System.out.println("world");
+            CanvasCommandsInvoker c = CanvasCommandsInvoker.getInstance();
+            System.out.println(event.getY());
+            c.execute(event);
+            System.out.println("tttttt");
+        });
+        init();
+    }
 
     public static DrawingCanvas getInstance() {
         if (ourInstance == null) ourInstance = new DrawingCanvas();
@@ -33,7 +43,6 @@ public class DrawingCanvas {
     public BridgePane getCanvas() {
         return canvas;
     }
-
 
     private ContextMenu makeContextMenu() {
         ContextMenu menu = new ContextMenu();
@@ -63,25 +72,7 @@ public class DrawingCanvas {
         });
     }
 
-
-    public List<BridgeNode> getChildren(){return canvas.getChildren();}
-
-    private DrawingCanvas() {
-        canvas = new BridgePane();
-        canvas.node.setId("canvas");
-        canvas.node.setLayoutX(0);
-        canvas.node.setLayoutY(120);
-        canvas.node.minHeight(600);
-        canvas.node.minWidth(1360);
-        canvas.setStyle("-fx-background-color:white;");
-        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED,event ->
-        {
-            System.out.println("world");
-            CanvasCommandsInvoker c = CanvasCommandsInvoker.getInstance();
-            System.out.println(event.getY());
-            c.execute(event);
-            System.out.println("tttttt");
-        });
-        init();
+    public List<BridgeNode> getChildren() {
+        return canvas.getChildren();
     }
 }

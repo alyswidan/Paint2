@@ -1,7 +1,6 @@
 package com.company;
 
 
-
 /**
  * Created by ADMIN on 5/13/2016.
  */

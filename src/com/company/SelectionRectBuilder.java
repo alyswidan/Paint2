@@ -6,6 +6,4 @@ package com.company;
 public class SelectionRectBuilder {
 
 
-
-
 }

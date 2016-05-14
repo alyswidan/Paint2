@@ -1,7 +1,5 @@
 package com.company;
 
-import javafx.scene.shape.Shape;
-
 import java.util.Stack;
 
 /**
