@@ -5,8 +5,7 @@ import java.util.Stack;
 /**
  * Created by ADMIN on 5/11/2016.
  */
-public class ParentInvoker implements Observer,Invoker
-{
+public class ParentInvoker implements Observer, Invoker {
     private Stack<Invoker> executersUndo;
     private Stack<Invoker> executersRedo;
 
@@ -19,8 +18,7 @@ public class ParentInvoker implements Observer,Invoker
     }
 
     @Override
-    public void undo()
-    {
+    public void undo() {
         executersRedo.push(executersUndo.peek());
         executersUndo.pop().undo();
     }

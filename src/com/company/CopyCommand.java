@@ -5,7 +5,10 @@ package com.company;
  */
 public class CopyCommand extends EditCommand {
     private Selection selection;
-    public CopyCommand(){}
+
+    public CopyCommand() {
+    }
+
     public CopyCommand(Selection selection) {
         this.selection = selection;
     }

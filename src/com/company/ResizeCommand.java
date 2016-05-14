@@ -14,21 +14,21 @@ public class ResizeCommand extends GeometricCommand {
     private MouseEvent event;
 
 
-    public ResizeCommand(Selection selection,MouseEvent event) {
+    public ResizeCommand(Selection selection, MouseEvent event) {
         this.selection = selection;
         this.event = event;
     }
+
     @Override
     public void execute() {
         // record the number of transforms when mouse is pressed
         //undoing is just removing the transforms added in the drag handler
         startTransformIndex = selection.getTransforms().size();
         drag = (new ResizeFactory(new Point2D(event.getX(),
-                            event.getY()), selection).makeHandler());
+                event.getY()), selection).makeHandler());
         selection.addOnDrag(drag);
         selection.addOnRelease(e -> selection.removeOnDrag(drag));
     }
-
 
 
 }

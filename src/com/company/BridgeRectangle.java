@@ -7,7 +7,6 @@ package com.company;
 import javafx.scene.shape.Rectangle;
 
 
-
 /**
  * Created by ADMIN on 5/12/2016.
  */
@@ -19,66 +18,82 @@ public class BridgeRectangle extends BridgeShape {
         node = new Rectangle();
 
     }
-    public BridgeRectangle(double x,double y)
-    {
+
+    public BridgeRectangle(double x, double y) {
         this();
         setX(x);
         setY(y);
     }
-    public BridgeRectangle(double x,double y,double width,double height )
-    {
-        this(x,y);
+
+    public BridgeRectangle(double x, double y, double width, double height) {
+        this(x, y);
         setWidth(width);
         setHeight(height);
     }
 
 
     public double getWidth() {
-        return ((Rectangle)node).getWidth();
+        return ((Rectangle) node).getWidth();
     }
 
     public void setWidth(double width) {
-        ((Rectangle)node).setWidth(width);
+        ((Rectangle) node).setWidth(width);
     }
 
     public double getHeight() {
-        return ((Rectangle)node).getWidth();
+        return ((Rectangle) node).getWidth();
     }
 
     public void setHeight(double height) {
-        ((Rectangle)node).setWidth(height);
+        ((Rectangle) node).setWidth(height);
     }
 
-    public void setX(double x)
-    {
-        ((Rectangle) node).setX(x);
+    public double getStartX() {
+        return getAnchorX();
     }
 
-    public void setY(double y)
-    {
-        ((Rectangle) node).setY(y);
+    public void setStartX(double x) {
+        setAnchorX(x);
     }
 
-    public void setStartX(double x){setAnchorX(x);}
-    public void setStartY(double y){setAnchorY(y);}
-    public double getStartX( ){return getAnchorX();}
-    public double getStartY(){return getAnchorY();}
+    public double getStartY() {
+        return getAnchorY();
+    }
 
-    public double getX()
-    {
+    public void setStartY(double y) {
+        setAnchorY(y);
+    }
+
+    public double getX() {
         return ((Rectangle) node).getX();
     }
 
-    public double getY()
-    {
+    public void setX(double x) {
+        ((Rectangle) node).setX(x);
+    }
+
+    public double getY() {
         return ((Rectangle) node).getY();
     }
 
-    public double getCentreX(){return getX()+getWidth()/2;}
-    public double getCentreY(){return getY()+getHeight()/2;}
+    public void setY(double y) {
+        ((Rectangle) node).setY(y);
+    }
+
+    public double getCentreX() {
+        return getX() + getWidth() / 2;
+    }
+
+    public double getCentreY() {
+        return getY() + getHeight() / 2;
+    }
 
     public double getAnchorX() {
         return startAnchor.getAnchorX();
+    }
+
+    public void setAnchorX(double anchorX) {
+        startAnchor.setAnchorX(anchorX);
     }
 
     public double getAnchorY() {
@@ -89,27 +104,18 @@ public class BridgeRectangle extends BridgeShape {
         startAnchor.setAnchorY(anchorY);
     }
 
-    public void setAnchorX(double anchorX) {
-        startAnchor.setAnchorX(anchorX);
-    }
-
-
-
-
-
     @Override
-    public BridgeRectangle copy()
-    {
+    public BridgeRectangle copy() {
         BridgeRectangle rectangle = new BridgeRectangle(((Rectangle) node).getX(),
-                ((Rectangle) node).getY(),((Rectangle) node).getWidth(),((Rectangle) node).getHeight());
+                ((Rectangle) node).getY(), ((Rectangle) node).getWidth(), ((Rectangle) node).getHeight());
         rectangle.setStrokeDetails(getStrokeDetails());
         rectangle.fill(getFill());
         return rectangle;
     }
-    public void expandToPosition(double x,double y)
-    {
-        double dx = Math.abs(startAnchor.getAnchorX()-x);
-        double dy = Math.abs(startAnchor.getAnchorY()-y);
+
+    public void expandToPosition(double x, double y) {
+        double dx = Math.abs(startAnchor.getAnchorX() - x);
+        double dy = Math.abs(startAnchor.getAnchorY() - y);
 
         if (x > startAnchor.getAnchorX() && y > startAnchor.getAnchorY()) {
             setX(startAnchor.getAnchorX());

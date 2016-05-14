@@ -1,244 +1,289 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-
-<VBox fx:id="root" fillWidth="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.Controller">
-   <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="1280.0">
-          <children>
-              <ToolBar layoutY="25.0" prefHeight="120.0" prefWidth="1360.0" />
-              <GridPane fx:id="gridShape" layoutX="10.0" layoutY="48.0" onMouseClicked="#handleCanvas" onMousePressed="#handleCanvas" prefHeight="90.0" prefWidth="150.0">
-                  <children>
-                      <ToggleButton fx:id="line" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0" text="ToggleButton">
-                          <graphic>
-                              <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@images/line.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                          <toggleGroup>
-                              <ToggleGroup fx:id="toggleGrp1" />
-                          </toggleGroup>
-                      </ToggleButton>
-                      <ToggleButton fx:id="rectangle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="1">
-                          <graphic>
-                              <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@images/rectangle.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                      </ToggleButton>
-                      <ToggleButton fx:id="square" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="2">
-                          <graphic>
-                              <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@images/square.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                      </ToggleButton>
-                      <ToggleButton fx:id="righttriangle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.rowIndex="1">
-                          <graphic>
-                              <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@images/rightTriangle.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                      </ToggleButton>
-                      <ToggleButton fx:id="isoscelestriangle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                          <graphic>
-                              <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@images/isoTriangle.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                      </ToggleButton>
-                      <ToggleButton fx:id="equilateraltriangle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                          <graphic>
-                              <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@images/triangle.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                      </ToggleButton>
-                      <ToggleButton fx:id="circle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.rowIndex="2">
-                          <graphic>
-                              <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@images/circle.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                      </ToggleButton>
-                      <ToggleButton fx:id="ellipse" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#handleCanvas" prefHeight="30.0" prefWidth="52.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                          <graphic>
-                              <ImageView fitHeight="18.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@images/ellipse.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                      </ToggleButton>
-                      <ToggleButton fx:id="polygon" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0" text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                          <graphic>
-                              <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@images/polygon.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                      </ToggleButton>
-                  </children>
-                  <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-              </GridPane>
-              <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="42.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Shapes" textAlignment="CENTER" />
-              <MenuBar>
-                  <menus>
-                      <Menu mnemonicParsing="false" text="File">
-                          <items>
-                              <MenuItem mnemonicParsing="false" text="New" />
-                              <MenuItem mnemonicParsing="false" text="Open" />
-                              <MenuItem mnemonicParsing="false" text="Save" />
-                              <MenuItem mnemonicParsing="false" text="Close" />
-                          </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Edit">
-                          <items>
-                              <MenuItem mnemonicParsing="false" text="Delete" />
-                          </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                          <items>
-                              <MenuItem mnemonicParsing="false" text="About" />
-                          </items>
-                      </Menu>
-                  </menus>
-              </MenuBar>
-              <ColorPicker fx:id="colorPicker" layoutX="385.0" layoutY="48.0" />
-              <Text fontSmoothingType="LCD" layoutX="390.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color Chooser" textAlignment="CENTER" />
-              <Text fontSmoothingType="LCD" layoutX="205.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stroke Width" textAlignment="CENTER" />
-              <TextField fx:id="strokeWidth" layoutX="200.0" layoutY="48.0" />
-              <Text fontSmoothingType="LCD" layoutX="205.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stroke Style" textAlignment="CENTER" />
-              <ComboBox layoutX="200.0" layoutY="100.0" prefWidth="150.0" />
-              <Text fontSmoothingType="LCD" layoutX="505.0" layoutY="42.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Tools" textAlignment="CENTER" />
-              <Line endX="180.0" endY="135.0" opacity="0.35" startX="180.0" startY="35.0" />
-              <Line endX="365.0" endY="135.0" opacity="0.35" startX="365.0" startY="35.0" />
-              <Line endX="485.0" endY="135.0" opacity="0.35" startX="485.0" startY="35.0" />
-              <ToggleButton fx:id="select" contentDisplay="GRAPHIC_ONLY" layoutX="500.0" layoutY="48.0" mnemonicParsing="false" text="ToggleButton" toggleGroup="$toggleGrp1">
-                  <graphic>
-                      <ImageView fitHeight="50.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@images/select.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-              </ToggleButton>
-              <ToggleButton fx:id="erase" contentDisplay="GRAPHIC_ONLY" layoutX="545.0" layoutY="108.5" mnemonicParsing="false" text="ToggleButton" toggleGroup="$toggleGrp1">
-                  <graphic>
-                      <ImageView fitHeight="25.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" x="500.0" y="90.0">
-                          <image>
-                              <Image url="@images/eraser.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-            </ToggleButton>
-              <ToggleButton fx:id="fill" contentDisplay="GRAPHIC_ONLY" layoutX="500.0" layoutY="108.5" mnemonicParsing="false" text="ToggleButton" toggleGroup="$toggleGrp1">
-                  <graphic>
-                      <ImageView fitHeight="25.0" fitWidth="60.0" layoutX="500.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@images/fill.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-            </ToggleButton>
-              <Line endX="600.0" endY="135.0" opacity="0.35" startX="600.0" startY="48.0" style="-fx-stroke-dash-array: 8;" />
-              <CheckBox fx:id="gridView" alignment="CENTER" layoutX="615.0" layoutY="48.0" mnemonicParsing="false" text="Show Grid">
-                  <font>
-                      <Font size="16.0" />
-                  </font>
-              </CheckBox>
-              <ComboBox layoutX="615.0" layoutY="105.0" prefWidth="150.0" />
-              <Text fontSmoothingType="LCD" layoutX="815.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clipboard" textAlignment="CENTER" />
-              <Text fontSmoothingType="LCD" layoutX="620.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shape Rotation" textAlignment="CENTER" />
-              <Line endX="780.0" endY="135.0" opacity="0.35" startX="780.0" startY="35.0" />
-              <Button fx:id="undo" contentDisplay="GRAPHIC_ONLY" layoutX="950.0" layoutY="48.0" mnemonicParsing="false" text="Button" textAlignment="CENTER">
-                  <graphic>
-                      <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@images/Undo.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-              </Button>
-              <Line endX="925.0" endY="135.0" opacity="0.35" startX="925.0" startY="35.0" />
-              <Text fontSmoothingType="LCD" layoutX="970.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Undo" textAlignment="CENTER" />
-              <Button fx:id="redo" contentDisplay="GRAPHIC_ONLY" layoutX="1040.0" layoutY="48.0" mnemonicParsing="false" text="Button" textAlignment="CENTER">
-                  <graphic>
-                      <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@images/redo.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-              </Button>
-              <Text fontSmoothingType="LCD" layoutX="1065.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Redo" textAlignment="CENTER" />
-              <Button fx:id="copy" contentDisplay="GRAPHIC_ONLY" layoutX="795.0" layoutY="48.0" mnemonicParsing="false" text="Button">
-                  <graphic>
-                      <ImageView fitHeight="35.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@images/copy.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-              </Button>
-              <Button fx:id="cut" contentDisplay="GRAPHIC_ONLY" layoutX="850.0" layoutY="48.0" mnemonicParsing="false" text="Button">
-                  <graphic>
-                      <ImageView fitHeight="35.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@images/cut.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-            </Button>
-              <Button fx:id="paste" contentDisplay="GRAPHIC_ONLY" layoutX="795.0" layoutY="95.0" mnemonicParsing="false" text="Button">
-                  <graphic>
-                      <ImageView fitHeight="35.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@images/paste.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-            </Button>
-              <Button fx:id="delete" contentDisplay="GRAPHIC_ONLY" layoutX="850.0" layoutY="95.0" mnemonicParsing="false" text="Button">
-                  <graphic>
-                      <ImageView fitHeight="35.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@images/delete.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-            </Button>
-            <ListView fx:id="commandHistory" layoutX="1130.0" layoutY="48.0" prefHeight="90.0" prefWidth="220.0" />
-          </children>
-      </Pane>
-   </children>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="root" fillWidth="false" xmlns="http://javafx.com/javafx/8"
+      fx:controller="com.company.Controller">
+    <children>
+        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0"
+              prefWidth="1280.0">
+            <children>
+                <ToolBar layoutY="25.0" prefHeight="120.0" prefWidth="1360.0"/>
+                <GridPane fx:id="gridShape" layoutX="10.0" layoutY="48.0" onMouseClicked="#handleCanvas"
+                          onMousePressed="#handleCanvas" prefHeight="90.0" prefWidth="150.0">
+                    <children>
+                        <ToggleButton fx:id="line" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                      onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0"
+                                      text="ToggleButton">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/line.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <toggleGroup>
+                                <ToggleGroup fx:id="toggleGrp1"/>
+                            </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton fx:id="rectangle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                      onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0"
+                                      text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="1">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/rectangle.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="square" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                      onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0"
+                                      text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="2">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/square.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="righttriangle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                      onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0"
+                                      text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.rowIndex="1">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/rightTriangle.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="isoscelestriangle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                      onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0"
+                                      text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="1"
+                                      GridPane.rowIndex="1">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/isoTriangle.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="equilateraltriangle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                      onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0"
+                                      text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="2"
+                                      GridPane.rowIndex="1">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/triangle.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="circle" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                      onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0"
+                                      text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.rowIndex="2">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/circle.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="ellipse" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                      onMouseClicked="#handleCanvas" prefHeight="30.0" prefWidth="52.0"
+                                      text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="1"
+                                      GridPane.rowIndex="2">
+                            <graphic>
+                                <ImageView fitHeight="18.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/ellipse.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                        <ToggleButton fx:id="polygon" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false"
+                                      onMouseClicked="#handleCanvas" prefHeight="32.0" prefWidth="50.0"
+                                      text="ToggleButton" toggleGroup="$toggleGrp1" GridPane.columnIndex="2"
+                                      GridPane.rowIndex="2">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/polygon.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                    </children>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                </GridPane>
+                <Text fontSmoothingType="LCD" layoutX="15.0" layoutY="42.0" stroke="BLACK" strokeType="OUTSIDE"
+                      strokeWidth="0.0" text="Shapes" textAlignment="CENTER"/>
+                <MenuBar>
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="New"/>
+                                <MenuItem mnemonicParsing="false" text="Open"/>
+                                <MenuItem mnemonicParsing="false" text="Save"/>
+                                <MenuItem mnemonicParsing="false" text="Close"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Edit">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About"/>
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <ColorPicker fx:id="colorPicker" layoutX="385.0" layoutY="48.0"/>
+                <Text fontSmoothingType="LCD" layoutX="390.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Color Chooser" textAlignment="CENTER"/>
+                <Text fontSmoothingType="LCD" layoutX="205.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Stroke Width" textAlignment="CENTER"/>
+                <TextField fx:id="strokeWidth" layoutX="200.0" layoutY="48.0"/>
+                <Text fontSmoothingType="LCD" layoutX="205.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Stroke Style" textAlignment="CENTER"/>
+                <ComboBox layoutX="200.0" layoutY="100.0" prefWidth="150.0"/>
+                <Text fontSmoothingType="LCD" layoutX="505.0" layoutY="42.0" stroke="BLACK" strokeType="OUTSIDE"
+                      strokeWidth="0.0" text="Tools" textAlignment="CENTER"/>
+                <Line endX="180.0" endY="135.0" opacity="0.35" startX="180.0" startY="35.0"/>
+                <Line endX="365.0" endY="135.0" opacity="0.35" startX="365.0" startY="35.0"/>
+                <Line endX="485.0" endY="135.0" opacity="0.35" startX="485.0" startY="35.0"/>
+                <ToggleButton fx:id="select" contentDisplay="GRAPHIC_ONLY" layoutX="500.0" layoutY="48.0"
+                              mnemonicParsing="false" text="ToggleButton" toggleGroup="$toggleGrp1">
+                    <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/select.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="erase" contentDisplay="GRAPHIC_ONLY" layoutX="545.0" layoutY="108.5"
+                              mnemonicParsing="false" text="ToggleButton" toggleGroup="$toggleGrp1">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" x="500.0"
+                                   y="90.0">
+                            <image>
+                                <Image url="@images/eraser.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="fill" contentDisplay="GRAPHIC_ONLY" layoutX="500.0" layoutY="108.5"
+                              mnemonicParsing="false" text="ToggleButton" toggleGroup="$toggleGrp1">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="60.0" layoutX="500.0" layoutY="90.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@images/fill.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </ToggleButton>
+                <Line endX="600.0" endY="135.0" opacity="0.35" startX="600.0" startY="48.0"
+                      style="-fx-stroke-dash-array: 8;"/>
+                <CheckBox fx:id="gridView" alignment="CENTER" layoutX="615.0" layoutY="48.0" mnemonicParsing="false"
+                          text="Show Grid">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </CheckBox>
+                <ComboBox layoutX="615.0" layoutY="105.0" prefWidth="150.0"/>
+                <Text fontSmoothingType="LCD" layoutX="815.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Clipboard" textAlignment="CENTER"/>
+                <Text fontSmoothingType="LCD" layoutX="620.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Shape Rotation" textAlignment="CENTER"/>
+                <Line endX="780.0" endY="135.0" opacity="0.35" startX="780.0" startY="35.0"/>
+                <Button fx:id="undo" contentDisplay="GRAPHIC_ONLY" layoutX="950.0" layoutY="48.0"
+                        mnemonicParsing="false" text="Button" textAlignment="CENTER">
+                    <graphic>
+                        <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/Undo.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Line endX="925.0" endY="135.0" opacity="0.35" startX="925.0" startY="35.0"/>
+                <Text fontSmoothingType="LCD" layoutX="970.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Undo" textAlignment="CENTER"/>
+                <Button fx:id="redo" contentDisplay="GRAPHIC_ONLY" layoutX="1040.0" layoutY="48.0"
+                        mnemonicParsing="false" text="Button" textAlignment="CENTER">
+                    <graphic>
+                        <ImageView fitHeight="60.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/redo.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Text fontSmoothingType="LCD" layoutX="1065.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Redo" textAlignment="CENTER"/>
+                <Button fx:id="copy" contentDisplay="GRAPHIC_ONLY" layoutX="795.0" layoutY="48.0"
+                        mnemonicParsing="false" text="Button">
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/copy.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="cut" contentDisplay="GRAPHIC_ONLY" layoutX="850.0" layoutY="48.0" mnemonicParsing="false"
+                        text="Button">
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/cut.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="paste" contentDisplay="GRAPHIC_ONLY" layoutX="795.0" layoutY="95.0"
+                        mnemonicParsing="false" text="Button">
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/paste.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="delete" contentDisplay="GRAPHIC_ONLY" layoutX="850.0" layoutY="95.0"
+                        mnemonicParsing="false" text="Button">
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/delete.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <ListView fx:id="commandHistory" layoutX="1130.0" layoutY="48.0" prefHeight="90.0" prefWidth="220.0"/>
+            </children>
+        </Pane>
+    </children>
 </VBox>

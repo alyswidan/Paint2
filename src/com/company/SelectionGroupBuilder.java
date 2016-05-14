@@ -1,13 +1,7 @@
 package com.company;
 
 import javafx.geometry.Point2D;
-import javafx.scene.Group;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
-import sun.corba.Bridge;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,8 +10,8 @@ import java.util.List;
  * Created by ADMIN on 5/3/2016.
  */
 public class SelectionGroupBuilder {
-    private Selection selection;
     private final double anchorRadius = 5, padding = 5;
+    private Selection selection;
     private BridgeRectangle selectionRect;
     private BridgeGroup accessoryGroup;
 
@@ -79,7 +73,7 @@ public class SelectionGroupBuilder {
     public BridgeGroup buildSelectionHandleGroup() {
         accessoryGroup = new BridgeGroup();
         accessoryGroup.addChild(selectionRect);
-        accessoryGroup.addAll(getSelectionAccessories());
+        //accessoryGroup.addAll(getSelectionAccessories());
         return accessoryGroup;
     }
 

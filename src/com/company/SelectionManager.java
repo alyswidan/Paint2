@@ -11,6 +11,10 @@ public class SelectionManager {
     private static SelectionManager ourInstance;
     private List<Selection> selections;
 
+    private SelectionManager() {
+        selections = new ArrayList<>();
+    }
+
     public static SelectionManager getInstance() {
         if (ourInstance == null)
             ourInstance = new SelectionManager();
@@ -18,24 +22,25 @@ public class SelectionManager {
 
     }
 
-    private SelectionManager() {
-        selections = new ArrayList<>();
-    }
-
     public void add(Selection selection) {
         selections.add(selection);
     }
 
-    public void cancelAll()
-    {
+    public void cancelAll() {
         selections.forEach(Selection::cancel);
         selections.forEach(selections::remove);
     }
-    public void remove(Selection selection) {selections.remove(selection);}
-    public List<Selection> getSelections(){return selections;}
-    public Optional<Selection> isInSelection(double x,double y)
-    {
-        return selections.stream().filter(selection -> selection.contains(x,y)).findFirst();
+
+    public void remove(Selection selection) {
+        selections.remove(selection);
+    }
+
+    public List<Selection> getSelections() {
+        return selections;
+    }
+
+    public Optional<Selection> isInSelection(double x, double y) {
+        return selections.stream().filter(selection -> selection.contains(x, y)).findFirst();
     }
 
 }

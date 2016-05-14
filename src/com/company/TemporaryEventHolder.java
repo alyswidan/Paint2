@@ -9,7 +9,6 @@ public class TemporaryEventHolder<T extends EventHandler> {
     private T event;
 
 
-
     public T getEvent() {
         return event;
     }

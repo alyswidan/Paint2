@@ -22,26 +22,24 @@ public class SelectCommand implements Command {
     @Override
     public void execute() {
         drag = e -> {
-            selection.expandRectToPos(event.getX(),event.getY());
+            selection.expandRectToPos(event.getX(), event.getY());
         };
 
         release = e -> {
             selection.getSelection();
             selection.submitSelection();
-            DrawingCanvas.getInstance().getCanvas().removeEventHandler(MouseEvent.MOUSE_DRAGGED,drag);
+            DrawingCanvas.getInstance().getCanvas().removeEventHandler(MouseEvent.MOUSE_DRAGGED, drag);
         };
 
-        if(SelectionManager.getInstance().getSelections().size()>0)
-        {
-            if(!SelectionManager.getInstance().isInSelection(event.getX(),event.getY()).isPresent())
+        if (SelectionManager.getInstance().getSelections().size() > 0) {
+            if (!SelectionManager.getInstance().isInSelection(event.getX(), event.getY()).isPresent())
                 SelectionManager.getInstance().cancelAll();
-            DrawingCanvas.getInstance().getCanvas().removeEventHandler(MouseEvent.MOUSE_RELEASED,release);
-        }
-        else {
-            selection = Selection.fromStartPoint(event.getX(),event.getY());
+            DrawingCanvas.getInstance().getCanvas().removeEventHandler(MouseEvent.MOUSE_RELEASED, release);
+        } else {
+            selection = Selection.fromStartPoint(event.getX(), event.getY());
             selection.addRect();
-            DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_DRAGGED,drag);
-            DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED,release);
+            DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_DRAGGED, drag);
+            DrawingCanvas.getInstance().getCanvas().addEventHandler(MouseEvent.MOUSE_RELEASED, release);
         }
     }
 
@@ -51,5 +49,7 @@ public class SelectCommand implements Command {
     }
 
     @Override
-    public void redo() {selection.add();}
+    public void redo() {
+        selection.add();
+    }
 }

@@ -11,28 +11,27 @@ public class CopyableShape {
     public CopyableShape(Shape copyableShape) {
         this.shape = copyableShape;
     }
-    private CopyableShape(){this.shape = null;}
+
+    private CopyableShape() {
+        this.shape = null;
+    }
     //should return copyableshape but not yet updated
 
-     Shape copy()
-     {
-         Shape copyableVersion = null;
-         if(shape instanceof Circle)
+    Shape copy() {
+        Shape copyableVersion = null;
+        if (shape instanceof Circle)
             copyableVersion = copyCircle();
-         else if(shape instanceof Rectangle)
+        else if (shape instanceof Rectangle)
             copyableVersion = copyRect();
-         else if(shape instanceof Line)
-             copyableVersion = copyLine();
-         else if(shape instanceof Polygon)
-             copyableVersion = copyPolygon();
-         else if (shape instanceof Ellipse)
-             copyableVersion = copyPolygon();
+        else if (shape instanceof Line)
+            copyableVersion = copyLine();
+        else if (shape instanceof Polygon)
+            copyableVersion = copyPolygon();
+        else if (shape instanceof Ellipse)
+            copyableVersion = copyPolygon();
 
-         return copyableVersion;
-     }
-
-
-
+        return copyableVersion;
+    }
 
 
     private Shape copyCircle() {
@@ -45,16 +44,15 @@ public class CopyableShape {
 
 
     private Shape copyRect() {
-        Rectangle rectangle = new Rectangle(((Rectangle)shape).getX(),
-                ((Rectangle)shape).getY(),
-                ((Rectangle)shape).getWidth(),
-                ((Rectangle)shape).getHeight());
+        Rectangle rectangle = new Rectangle(((Rectangle) shape).getX(),
+                ((Rectangle) shape).getY(),
+                ((Rectangle) shape).getWidth(),
+                ((Rectangle) shape).getHeight());
         rectangle.setStyle(shape.getStyle());
         return rectangle;
     }
 
-    private Shape copyEllipse()
-    {
+    private Shape copyEllipse() {
         Ellipse ellipse = new Ellipse(((Ellipse) shape).getCenterX(),
                 ((Ellipse) shape).getCenterY(),
                 ((Ellipse) shape).getRadiusX(),
@@ -63,24 +61,21 @@ public class CopyableShape {
         return ellipse;
     }
 
-    private Shape copyLine()
-    {
+    private Shape copyLine() {
         Line line = new Line(((Line) shape).getStartX(), ((Line) shape).getStartY()
                 , ((Line) shape).getEndX(), ((Line) shape).getEndY());
         line.setStyle((shape).getStyle());
         return line;
     }
 
-    private Shape copyPolygon()
-    {
+    private Shape copyPolygon() {
         Polygon polygon = new Polygon();
         polygon.getPoints().addAll(((Polygon) shape).getPoints());
         polygon.setStyle(shape.getStyle());
-        return  polygon;
+        return polygon;
     }
 
-    private Shape copyEmpty()
-    {
+    private Shape copyEmpty() {
         return null;
     }
 

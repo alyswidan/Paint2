@@ -1,8 +1,5 @@
 package com.company;
 
-import javafx.geometry.Point2D;
-import javafx.scene.input.MouseEvent;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +9,14 @@ import java.util.stream.Collectors;
 /**
  * Created by ADMIN on 5/11/2016.
  */
-public class EditCommandsInvoker implements Observable,Invoker {
+public class EditCommandsInvoker implements Observable, Invoker {
 
+    private static EditCommandsInvoker invoker;
     Selection selection;
+    List<Class<? extends Command>> commands = new ArrayList<>();
     private Stack<Command> undoCommands = new Stack<>();
     private Stack<Command> redoCommands = new Stack<>();
     private List<Observer> observers = new ArrayList<>();
-    List<Class<? extends Command>> commands = new ArrayList<>();
-    private static EditCommandsInvoker invoker;
 
     private EditCommandsInvoker() {
         commands.set(CommandTypes.PASTE.ordinal(), PasteCommand.class);
@@ -52,11 +49,13 @@ public class EditCommandsInvoker implements Observable,Invoker {
             e.printStackTrace();
         }
     }
+
     @Override
     public void undo() {
         undoCommands.peek().undo();
         redoCommands.push(undoCommands.pop());
     }
+
     @Override
     public void redo() {
         redoCommands.peek().execute();

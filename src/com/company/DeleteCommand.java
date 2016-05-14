@@ -6,7 +6,10 @@ package com.company;
 public class DeleteCommand extends EditCommand {
 
     private Selection selection;
-    public DeleteCommand(){}
+
+    public DeleteCommand() {
+    }
+
     public DeleteCommand(Selection selection) {
         this.selection = selection;
     }

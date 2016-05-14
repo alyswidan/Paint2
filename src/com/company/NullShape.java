@@ -5,23 +5,23 @@ package com.company;
  */
 public class NullShape extends BridgeShape {
     @Override
-    public void setStartX(double x) {
-
-    }
-
-    @Override
-    public void setStartY(double y) {
-
-    }
-
-    @Override
     public double getStartX() {
         return 0;
     }
 
     @Override
+    public void setStartX(double x) {
+
+    }
+
+    @Override
     public double getStartY() {
         return 0;
+    }
+
+    @Override
+    public void setStartY(double y) {
+
     }
 
     @Override

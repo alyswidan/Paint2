@@ -3,7 +3,6 @@ package com.company;
 import javafx.scene.paint.Paint;
 
 
-
 /**
  * Created by user on 5/8/2016.
  */
@@ -13,12 +12,13 @@ public class Stroke {
     private String strokeStyle;
     private Paint color;
 
-    public Stroke(int strokeWidth,Paint color, String strokeStyle) {
+    public Stroke(int strokeWidth, Paint color, String strokeStyle) {
         this.strokeWidth = strokeWidth;
         this.strokeStyle = strokeStyle;
         this.color = color;
     }
-    public Stroke(int strokeWidth,Paint color) {
+
+    public Stroke(int strokeWidth, Paint color) {
         this.strokeWidth = strokeWidth;
         this.color = color;
     }

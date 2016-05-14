@@ -1,7 +1,5 @@
 package com.company;
 
-import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
@@ -20,8 +18,8 @@ public class BridgePane extends BridgeParent {
         ((Pane) node).setBackground(background);
     }
 
-    public void setStyle(String style){
-        ((Pane)node).setStyle(style);
+    public void setStyle(String style) {
+        ((Pane) node).setStyle(style);
     }
 
     @Override

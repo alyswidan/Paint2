@@ -22,5 +22,7 @@ public class PasteCommand implements Command {
     }
 
     @Override
-    public void redo() {selection.add();}
+    public void redo() {
+        selection.add();
+    }
 }

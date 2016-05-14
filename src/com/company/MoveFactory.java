@@ -12,7 +12,8 @@ public class MoveFactory {
 
     private Selection selection;
     private DragContext dragContext;
-    public MoveFactory(Selection selection,DragContext dragContext) {
+
+    public MoveFactory(Selection selection, DragContext dragContext) {
         this.selection = selection;
         this.dragContext = dragContext;
     }
@@ -20,7 +21,7 @@ public class MoveFactory {
     public EventHandler<MouseEvent> makeDragHandler() {
 
         return event -> {
-            selection.addTransform(new Translate(event.getX()-dragContext.getAnchorX(),event.getY()-dragContext.getAnchorY()));
+            selection.addTransform(new Translate(event.getX() - dragContext.getAnchorX(), event.getY() - dragContext.getAnchorY()));
         };
     }
 
